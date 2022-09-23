@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>computer graphics on Iker Galardi</title>
+    <link>https://ikergalardi.github.io/tags/computer-graphics/</link>
+    <description>Recent content in computer graphics on Iker Galardi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 30 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/tags/computer-graphics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rendering adventures</title>
+      <link>https://ikergalardi.github.io/post/2021-11-30-rendering-adventures/</link>
+      <pubDate>Tue, 30 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ikergalardi.github.io/post/2021-11-30-rendering-adventures/</guid>
+      <description>Rendering adventures I’ve always been amazed with computer graphics, and looking at recent advancements with ray tracing, and the great upgrade that Unreal Engine 4 supposed over Unreal Engine 3 with the physically based rendering (PBR from now on) work flow made me more curious.
+I had tried before GPU accelerated rendering with OpenGL, but I had never advanced more than a textured quad, so 2021’s summer was the time to finally tackle this curiosity with a own built PBR renderer written in C++ and vulkan.</description>
+    </item>
+    
+  </channel>
+</rss>

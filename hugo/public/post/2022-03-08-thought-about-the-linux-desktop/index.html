@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Thoughts on the linux desktop - Iker Galardi</title>
+  <meta name="description" content="Thoughts on the linux desktop Due to some hardware changes on my setup I’ve realized some issues regarding the current situation with the linux desktop (and distributions in general). So with this article I’ll try to explain my thoughts and propose some changes. Normal desktop usage
+Let’s start analyzing the whole windowing stack… xorg or wayland? Wayland, being new in the neighborhood has a more modern and secure approach, but stability is lost due to new “untested” code being written.">
+  <meta name="author" content="Iker Galardi"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Iker Galardi",
+    
+    "url": "https:\/\/ikergalardi.github.io"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ikergalardi.github.io"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ikergalardi.github.io",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ikergalardi.github.io\/post\/2022-03-08-thought-about-the-linux-desktop\/",
+          "name": "Thoughts on the linux desktop"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Iker Galardi"
+  },
+  "headline": "Thoughts on the linux desktop",
+  "description" : "Thoughts on the linux desktop Due to some hardware changes on my setup I’ve realized some issues regarding the current situation with the linux desktop (and distributions in general). So with this article I’ll try to explain my thoughts and propose some changes. Normal desktop usage\nLet’s start analyzing the whole windowing stack… xorg or wayland? Wayland, being new in the neighborhood has a more modern and secure approach, but stability is lost due to new “untested” code being written.",
+  "inLanguage" : "en",
+  "wordCount":  898 ,
+  "datePublished" : "2022-03-08T00:00:00",
+  "dateModified" : "2022-03-08T00:00:00",
+  "image" : "https:\/\/ikergalardi.github.io\/img\/avatar-icon.png",
+  "keywords" : [ "linux, rant" ],
+  "mainEntityOfPage" : "https:\/\/ikergalardi.github.io\/post\/2022-03-08-thought-about-the-linux-desktop\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ikergalardi.github.io",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ikergalardi.github.io\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Thoughts on the linux desktop" />
+<meta property="og:description" content="Thoughts on the linux desktop Due to some hardware changes on my setup I’ve realized some issues regarding the current situation with the linux desktop (and distributions in general). So with this article I’ll try to explain my thoughts and propose some changes. Normal desktop usage
+Let’s start analyzing the whole windowing stack… xorg or wayland? Wayland, being new in the neighborhood has a more modern and secure approach, but stability is lost due to new “untested” code being written.">
+<meta property="og:image" content="https://ikergalardi.github.io/img/avatar-icon.png" />
+<meta property="og:url" content="https://ikergalardi.github.io/post/2022-03-08-thought-about-the-linux-desktop/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Iker Galardi" />
+
+  <meta name="twitter:title" content="Thoughts on the linux desktop" />
+  <meta name="twitter:description" content="Thoughts on the linux desktop Due to some hardware changes on my setup I’ve realized some issues regarding the current situation with the linux desktop (and distributions in general). So with this …">
+  <meta name="twitter:image" content="https://ikergalardi.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link href='https://ikergalardi.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.93.3" />
+  <link rel="alternate" href="https://ikergalardi.github.io/index.xml" type="application/rss+xml" title="Iker Galardi"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://ikergalardi.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://ikergalardi.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://ikergalardi.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://ikergalardi.github.io">Iker Galardi</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Projects" href="/page/projects/">Projects</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Iker Galardi" href="https://ikergalardi.github.io">
+            <img class="avatar-img" src="https://ikergalardi.github.io/img/avatar-icon.png" alt="Iker Galardi" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Thoughts on the linux desktop</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on March 8, 2022
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;5&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;898&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Iker Galardi
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h1 id="thoughts-on-the-linux-desktop">Thoughts on the linux desktop</h1>
+<p>Due to some hardware changes on my setup I’ve realized some issues regarding the current situation with the linux desktop (and distributions in general). So with this article I’ll try to explain my thoughts and propose some changes.
+Normal desktop usage</p>
+<p>Let’s start analyzing the whole windowing stack… xorg or wayland? Wayland, being new in the neighborhood has a more modern and secure approach, but stability is lost due to new “untested” code being written. The most notable security features are that no input events like keyboard presses are sent to non focused windows and lack of screen recording. Of course, we all want to be secure with our computers, so basically removing the existence of keyloggers would make us happy, right? Wrong! This approach makes shortcut daemons completely useless, and screen recording is completely broken… Yay! Apart from that, as wayland is not a server (is just the specification), the entire implementation responsibility becames part of the desktop environment/window manager developers, fragmenting the implementation. This does not seem wrong at first, but as I discovered recently with graphics programming, small differences in drivers can make applications run on one machine and crash on others (this does not happen right now as I’m aware, but as more wayland compositors start being built with the time, I predict this will be a problem). But of course not all the things are issues, as seen with comparisons between GNOME xorg and GNOME wayland, the performance and battery life benefits are big (pipewire also solving the screen sharing issue); so it seems that it’s the future.</p>
+<p>Audio is another big issue in the linux desktop, as pulse has been buggy and unpredictable from the start. Many users report that pulse sometimes forgets the audio configurations and defaults randomly (although I haven’t experienced that) and random crashes. For me the most annoying things are that pulse is not capable of maintaining Bluetooth devices and starts randomly changing into the speakers, or pulse being unable to detect the microphone array of my laptop and sounding like a 50 year old microphone.</p>
+<p>And last but not least… please we have hardware acceleration on modern computers, let’s use it! Looking at a PDF document or seeing a youtube video should not suck up my battery as hard as it does!
+Developers perspective</p>
+<p>Let’s bring the distribution fragmentation topic again. Some people say that’s not a concern because they link all their applications statically (shame on you if you are on that group), others exaggerate saying that glibc breaks every release (that’s a lie, it breaks every two releases), and others fell in love with flatpak and don’t see beyond that. As always with everything, real life is more complicated than all those points of view. All points of view have their point (forgive the repetition).</p>
+<p>Remember LMake? Well, when I tried to build a single binary for all distributions (at least distributions installed by my friends), some random problem arose… The c++ standard 17 was implemented on both arch and void’s installed libraries, but as my application was built using a newer version of glibc, so the dynamic linker refused to use the installed libc and gracefully exited with a completely understandable error message (forgive the irony). When a developer uses a standard, it expects that all the versions of the library that implement that standard will work (maybe not perfectly because unintentionally relaying on bugs, but at least try to work). So what do most developers do? Recompile the application for each distribution or statically link everything in the world into a big fat binary executable (shame on you Rust). What’s the solution? I don’t really know, but it is still a problem to solve anyway.</p>
+<p>To solve the before mentioned problem, AppImages where created, where they keep all the libraries they use in an embedded filesystem. This makes more sense than statically linked applications because you can embed configurations inside, making the application movable between distributions/computers maintaining the same look, feel and configurations. Of course, this has the same issues as the big fat statically linked binaries.</p>
+<p>Then, the flatpak team came with a solution… Runtimes! These runtimes are a collection of libraries that are common enough that can be used between applications, but still giving the chance to use specific library versions included on the flatpak bundle. Apart from that, they also implemented sandboxing, Yay! More security! Of course, not all is perfect, as it makes very difficult to change internal configurations for applications and sometimes the desktop theming is not picked up as well as users expect.</p>
+<p>Most distributions are still reluctant to use this universal packages like flatpak, and still use their traditional dependency hell based package management. I’ve seen the dependency graph of Xorg…. And I haven’t slept well since then… I still have nightmares…
+Conclusions</p>
+<p>Well, as explained, linux desktop is the worst thing I ever have seen… Not really, I still prefer it over Windows, as it has many advantages I have not talked about (and probably don’t even realize). I still recommend linux to new users (don’t be scared of the learning curve please).</p>
+<p>Still, I want to try to solve some of the before mentioned issues with my next long term project. Still on the thinking and planning stage, but stay tuned if you are curious. See you next time!</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://ikergalardi.github.io/tags/linux/">linux</a>&nbsp;
+            
+              <a href="https://ikergalardi.github.io/tags/rant/">rant</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2022-03-08-thought-about-the-linux-desktop%2f&amp;text=Thoughts%20on%20the%20linux%20desktop&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fikergalardi.github.io%2fpost%2f2022-03-08-thought-about-the-linux-desktop%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2022-03-08-thought-about-the-linux-desktop%2f&amp;title=Thoughts%20on%20the%20linux%20desktop" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2022-03-08-thought-about-the-linux-desktop%2f&amp;title=Thoughts%20on%20the%20linux%20desktop" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2022-03-08-thought-about-the-linux-desktop%2f&amp;title=Thoughts%20on%20the%20linux%20desktop" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2022-03-08-thought-about-the-linux-desktop%2f&amp;description=Thoughts%20on%20the%20linux%20desktop" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://ikergalardi.github.io/post/2021-11-30-rendering-adventures/" data-toggle="tooltip" data-placement="top" title="Rendering adventures">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/IkerGalardi" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/IkerGalardi" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/user/username" title="Youtube">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="ikergalardi.github.io">Iker Galardi</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2022
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://ikergalardi.github.io">Iker Galardi</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.93.3</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://ikergalardi.github.io/js/main.js"></script>
+<script src="https://ikergalardi.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://ikergalardi.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+
