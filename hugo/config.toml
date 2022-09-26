@@ -12,8 +12,8 @@ pygmentsCodefencesGuessSyntax = true
 [Params]
   #subtitle = ""
   mainSections = ["post","posts"]
-  logo = "img/avatar-icon.png" # Expecting square dimensions
-  favicon = "img/favicon.ico"
+  logo = "img/avatar.jpeg" # Expecting square dimensions
+  favicon = "img/avatar.jpeg"
   dateFormat = "January 2, 2006"
   commit = false
   rss = true
