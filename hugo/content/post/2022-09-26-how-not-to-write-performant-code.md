@@ -2,7 +2,6 @@
 title: How not to write performant code
 date: 2022-09-26
 tags: ["allocator", "project"]
-draft: yes
 ---
 
 Don't you feel like `malloc` is really slow? Most probably not, as the `malloc` implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought that I could in 3 moths achieve what glibc achieved in most certainly triple the time. This is the story of how I ended up writing a memory allocator for my end of degree project for university.

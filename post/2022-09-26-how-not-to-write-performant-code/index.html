@@ -7,9 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Rendering adventures - Iker Galardi</title>
-  <meta name="description" content="Rendering adventures I’ve always been amazed with computer graphics, and looking at recent advancements with ray tracing, and the great upgrade that Unreal Engine 4 supposed over Unreal Engine 3 with the physically based rendering (PBR from now on) work flow made me more curious.
-I had tried before GPU accelerated rendering with OpenGL, but I had never advanced more than a textured quad, so 2021’s summer was the time to finally tackle this curiosity with a own built PBR renderer written in C&#43;&#43; and vulkan.">
+  <title>How not to write performant code - Iker Galardi</title>
+  <meta name="description" content="Don&rsquo;t you feel like malloc is really slow? Most probably not, as the malloc implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought that I could in 3 moths achieve what glibc achieved in most certainly triple the time. This is the story of how I ended up writing a memory allocator for my end of degree project for university.
+For the last 5 moths I have been writting a hybrid memory allocator using the SLAB allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations.">
   <meta name="author" content="Iker Galardi"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -45,8 +45,8 @@ I had tried before GPU accelerated rendering with OpenGL, but I had never advanc
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/ikergalardi.github.io\/post\/2021-11-30-rendering-adventures\/",
-          "name": "Rendering adventures"
+          "@id": "https:\/\/ikergalardi.github.io\/post\/2022-09-26-how-not-to-write-performant-code\/",
+          "name": "How not to write performant code"
         }
     }]
 }
@@ -57,15 +57,15 @@ I had tried before GPU accelerated rendering with OpenGL, but I had never advanc
   "author": {
     "name" : "Iker Galardi"
   },
-  "headline": "Rendering adventures",
-  "description" : "Rendering adventures I’ve always been amazed with computer graphics, and looking at recent advancements with ray tracing, and the great upgrade that Unreal Engine 4 supposed over Unreal Engine 3 with the physically based rendering (PBR from now on) work flow made me more curious.\nI had tried before GPU accelerated rendering with OpenGL, but I had never advanced more than a textured quad, so 2021’s summer was the time to finally tackle this curiosity with a own built PBR renderer written in C\u002b\u002b and vulkan.",
+  "headline": "How not to write performant code",
+  "description" : "Don\u0026rsquo;t you feel like malloc is really slow? Most probably not, as the malloc implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought that I could in 3 moths achieve what glibc achieved in most certainly triple the time. This is the story of how I ended up writing a memory allocator for my end of degree project for university.\nFor the last 5 moths I have been writting a hybrid memory allocator using the SLAB allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations.",
   "inLanguage" : "en",
-  "wordCount":  889 ,
-  "datePublished" : "2021-11-30T00:00:00",
-  "dateModified" : "2021-11-30T00:00:00",
+  "wordCount":  673 ,
+  "datePublished" : "2022-09-26T00:00:00",
+  "dateModified" : "2022-09-26T00:00:00",
   "image" : "https:\/\/ikergalardi.github.io\/img\/avatar.jpeg",
-  "keywords" : [ "computer graphics, project" ],
-  "mainEntityOfPage" : "https:\/\/ikergalardi.github.io\/post\/2021-11-30-rendering-adventures\/",
+  "keywords" : [ "allocator, project" ],
+  "mainEntityOfPage" : "https:\/\/ikergalardi.github.io\/post\/2022-09-26-how-not-to-write-performant-code\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/ikergalardi.github.io",
@@ -79,16 +79,16 @@ I had tried before GPU accelerated rendering with OpenGL, but I had never advanc
 }
 </script>
 
-<meta property="og:title" content="Rendering adventures" />
-<meta property="og:description" content="Rendering adventures I’ve always been amazed with computer graphics, and looking at recent advancements with ray tracing, and the great upgrade that Unreal Engine 4 supposed over Unreal Engine 3 with the physically based rendering (PBR from now on) work flow made me more curious.
-I had tried before GPU accelerated rendering with OpenGL, but I had never advanced more than a textured quad, so 2021’s summer was the time to finally tackle this curiosity with a own built PBR renderer written in C&#43;&#43; and vulkan.">
+<meta property="og:title" content="How not to write performant code" />
+<meta property="og:description" content="Don&rsquo;t you feel like malloc is really slow? Most probably not, as the malloc implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought that I could in 3 moths achieve what glibc achieved in most certainly triple the time. This is the story of how I ended up writing a memory allocator for my end of degree project for university.
+For the last 5 moths I have been writting a hybrid memory allocator using the SLAB allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations.">
 <meta property="og:image" content="https://ikergalardi.github.io/img/avatar.jpeg" />
-<meta property="og:url" content="https://ikergalardi.github.io/post/2021-11-30-rendering-adventures/" />
+<meta property="og:url" content="https://ikergalardi.github.io/post/2022-09-26-how-not-to-write-performant-code/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Iker Galardi" />
 
-  <meta name="twitter:title" content="Rendering adventures" />
-  <meta name="twitter:description" content="Rendering adventures I’ve always been amazed with computer graphics, and looking at recent advancements with ray tracing, and the great upgrade that Unreal Engine 4 supposed over Unreal Engine 3 with …">
+  <meta name="twitter:title" content="How not to write performant code" />
+  <meta name="twitter:description" content="Don&rsquo;t you feel like malloc is really slow? Most probably not, as the malloc implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought …">
   <meta name="twitter:image" content="https://ikergalardi.github.io/img/avatar.jpeg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link href='https://ikergalardi.github.io/img/avatar.jpeg' rel='icon' type='image/x-icon'/>
@@ -227,7 +227,7 @@ I had tried before GPU accelerated rendering with OpenGL, but I had never advanc
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
               
-                <h1>Rendering adventures</h1>
+                <h1>How not to write performant code</h1>
               
               
               
@@ -235,13 +235,13 @@ I had tried before GPU accelerated rendering with OpenGL, but I had never advanc
                 <span class="post-meta">
   
   
-  <i class="fas fa-calendar"></i>&nbsp;Posted on November 30, 2021
+  <i class="fas fa-calendar"></i>&nbsp;Posted on September 26, 2022
   
   
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;5&nbsp;minutes
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;889&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;673&nbsp;words
   
   
     
@@ -267,40 +267,32 @@ I had tried before GPU accelerated rendering with OpenGL, but I had never advanc
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="rendering-adventures">Rendering adventures</h1>
-<p>I’ve always been amazed with computer graphics, and looking at recent advancements with ray tracing, and the great upgrade that Unreal Engine 4 supposed over Unreal Engine 3 with the physically based rendering (PBR from now on) work flow made me more curious.</p>
-<p>I had tried before GPU accelerated rendering with OpenGL, but I had never advanced more than a textured quad, so 2021’s summer was the time to finally tackle this curiosity with a own built PBR renderer written in C++ and vulkan.</p>
-<p>In this writeup we’ll talk about how modern graphics work, the PBR and how the project went.
-Modern realtime rendering</p>
-<p>Rasterization is what modern video games use to create those beautiful graphics. There are more kinds of rendering techniques apart from rasterization like ray tracing or path tracing, but they all suffer to produce enough frames per second to make the illusion of movement, so it was not interesting for me.</p>
-<p>Rasterization works by converting triangles into pixels and drawing them by using special programs. As each pixel can be calculated independently, heavily parallel hardware like GPUs can make this technique real time. We can organize any object as a collection of points (or vertices as we call them), and form faces with those vertices. So, to describe any object, we basically need points and a description to connect them to form triangles. But, how can you map this triangles into the correct position to make the illusion of depth? With math, specifically with lineal algebra.</p>
-<p>Those object’s vertices come on what we call model space. This means that all the vertices are located relative to the root of the model. But this object needs to be located somewhere in the world, so what we do is transform all the vertices to position them on the world. This transformation is done using matrices. By multiplying the position vector of a vertex with the transformation matrix we basically move the vertex into the world position.</p>
-<p>After we’ve moved model’s vertices into world space, we encounter a problem: we can’t move our head around in this world, so what do we do? Let’s move the whole world to make the illusion of moving our heads! Those transformations are done by using what’s called the view matrix.</p>
-<p>Well, we already have the things in front of us, the work is already done, right? Wrong. The world is in the position we want, but reality has something strange called perspective that we need to simulate so that things look real. That’s done using the projection matrix.</p>
-<p>All those matrices are typically provided by math libraries like GLM or CGLM.</p>
-<p>Once the vertices are positioned where they should be, we need to light the pixels appropriately. There are several ways to calculate how much light has hit a particular part of the mesh and how much of that light gets reflected into the camera, but for this project the Cook-Torrance method has been chosen, as it creates accurate and beautiful lighting. For more information about how Cook-Torrance works you can check the documentation on the repository.
-Results</p>
-<p>So… how far did the project get? I got a realistic looking image, but the promise of using vulkan was too much for the project. Vulkan itself is a pretty complex API, so combining that with learning how PBR math works was a pretty bad idea. After some thinking, the graphics API was changed to OpenGL and the focus was put into understanding how that PBR works.</p>
-<p>As it can be seen in the image, the results obtained aren’t bad at all. Still, the renderer has lot’s of issues, and the most important one is the normal mapping. At first glance the image looks OK, but when you start realizing that some tiles are lit from the wrong side, the illusion falls apart.</p>
-<p>The structure of the program itself is a bit weird as well, as given the short time I had to build and learn how PBR rendering works, lot’s of shortcuts have been taken. The next are some of the weird parts of the structure:</p>
+        <p>Don&rsquo;t you feel like <code>malloc</code> is really slow? Most probably not, as the <code>malloc</code> implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought that I could in 3 moths achieve what glibc achieved in most certainly triple the time. This is the story of how I ended up writing a memory allocator for my end of degree project for university.</p>
+<p>For the last 5 moths I have been writting a hybrid memory allocator using the <a href="https://people.eecs.berkeley.edu/~kubitron/courses/cs194-24-S14/hand-outs/bonwick_slab.pdf">SLAB</a> allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations. The idea was&hellip; if the SLAB allocator has brought impressive performance improvements on the linux kernel, why can&rsquo;t it have the same performance improvements but for userspace applications? I still think that that&rsquo;s a pretty good premise for a project, but still, the project was a bit of a failure on my heart.</p>
+<p>After several ideas shared with my tutor, the one that we ended up working on was the slab allocator but for userspace. Meaning, that I needed to write a memory allocator (for the first time), and it needed to be <strong>FAST</strong> so I could beat GNU. The project ended up being a fight between me and callgrind/perf in order to discover what was the performance bottleneck on a function that had less than a millisecond of execution time.</p>
+<p>For everyone trying to enter the optimization world, let me tell you several MUSTs in order to have an easier time:</p>
 <ul>
-<li>Why differentiate mesh and model in such a confusing way?</li>
-<li>Why not use a ECS approach?</li>
-<li>Using GLTF format to read the scene and models. This way scenes could be built in blender and results could be compared more easily.</li>
-<li>Some kind of built in debugging would be really nice.</li>
-<li>Shader hot reloading to live edit them and see results more easily.</li>
+<li>
+<p>First, have some reliable performance numbers. Without having performance numbers nor something to test performance you are blind in the face of the problem. Having something to test the performance on makes you focus on the important parts of the code and not go blindly.</p>
+</li>
+<li>
+<p>Test multiple scenarios and go after the worst case. At the start of the project I had a simple benchmark that did mass allocations. After some tuning of the code, the performance was looking promising, but like I realized later, this was a small view on the whole story. After digging on the internet for allocator benchmarks, I realized that most of them put enphasis on the ordering of allocations and patterns. As it turns out, that was a very important factor when facing real world applications, and thus, the performance tuning done before was useless as the focus was on the wrong place.</p>
+</li>
+<li>
+<p>Avoid early optimizations. As it was on my case, I had to build the entire allocator from scratch (with performance in mind). Too early in the development I ended up optimizing several structures and functions, which made the entire structure of the project shift before even having all the features needed, making them difficult to be added later. Optimizing the code should be done after having all the features.</p>
+</li>
+<li>
+<p>Last but not least, know your tools! Knowing how to work with perf/callgrind and knowing their strengths and weakneses helps make better decisions. This is what I learned with this project: use perf at the start to see the main problem, later dive in the code using callgrind. Callgrind lets you see in better detail how your algorithms are executing so you can easily see if you are doing stupid things. Perf on the other side, lets you see the functions taking the most time (big hint) and hardware specific stuff like branch predictor or cache misses. Don&rsquo;t use just one, they have different strengths.</p>
+</li>
 </ul>
-<p>Before trying to do anything else with the project, the previous points should be addressed to be able to work more comfortably and not go crazy. Almost all the engine should be rewritten for that, so it probably would be easier to redo the project from scratch.
-Bored of computer graphics?</p>
-<p>Not at all. Since summer I’ve found many resources about this topic, including how Epic games approached UE4’s rendering engine and had an idea on combining more advanced techniques like deferred rendering and ray tracing that would be interesting to try to implement.</p>
-<p>But for now no more advancements will be done as University is keeping me pretty busy and I have more short term projects applying some newly learned topics.</p>
-<p>Stay tuned to see the projects I’m talking about and don’t forget to check the github repository of the project.</p>
+<p>After all the things learned, it wen&rsquo;t smoothly and the performance was good right? Wrong, it was too late already. The time given for the project was to small, and even though I ended up spending much more time than the permitted, the performance did not improve much. Still, I ended up with a 10, so my writting skills compensated for my coding skills 😉.</p>
+<p>It was a fun adventure, and I don&rsquo;t regret anything about the project, but still, next time I try to write good performant code, I&rsquo;ll take my own advice.</p>
 
 
         
           <div class="blog-tags">
             
-              <a href="https://ikergalardi.github.io/tags/computer-graphics/">computer graphics</a>&nbsp;
+              <a href="https://ikergalardi.github.io/tags/allocator/">allocator</a>&nbsp;
             
               <a href="https://ikergalardi.github.io/tags/project/">project</a>&nbsp;
             
@@ -317,42 +309,42 @@ Bored of computer graphics?</p>
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2021-11-30-rendering-adventures%2f&amp;text=Rendering%20adventures&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2022-09-26-how-not-to-write-performant-code%2f&amp;text=How%20not%20to%20write%20performant%20code&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fikergalardi.github.io%2fpost%2f2021-11-30-rendering-adventures%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fikergalardi.github.io%2fpost%2f2022-09-26-how-not-to-write-performant-code%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2021-11-30-rendering-adventures%2f&amp;title=Rendering%20adventures" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2022-09-26-how-not-to-write-performant-code%2f&amp;title=How%20not%20to%20write%20performant%20code" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2021-11-30-rendering-adventures%2f&amp;title=Rendering%20adventures" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2022-09-26-how-not-to-write-performant-code%2f&amp;title=How%20not%20to%20write%20performant%20code" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2021-11-30-rendering-adventures%2f&amp;title=Rendering%20adventures" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2022-09-26-how-not-to-write-performant-code%2f&amp;title=How%20not%20to%20write%20performant%20code" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2021-11-30-rendering-adventures%2f&amp;description=Rendering%20adventures" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2022-09-26-how-not-to-write-performant-code%2f&amp;description=How%20not%20to%20write%20performant%20code" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -374,7 +366,7 @@ Bored of computer graphics?</p>
                   <ul>
                 
                 
-                    <li><a href="/post/2022-09-26-how-not-to-write-performant-code/">How not to write performant code</a></li>
+                    <li><a href="/post/2021-11-30-rendering-adventures/">Rendering adventures</a></li>
                 
                     <li><a href="/post/2021-11-04-journey-to-first-completed-project/">Journey to first completed project</a></li>
                 
@@ -388,13 +380,9 @@ Bored of computer graphics?</p>
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://ikergalardi.github.io/post/2021-11-04-journey-to-first-completed-project/" data-toggle="tooltip" data-placement="top" title="Journey to first completed project">&larr; Previous Post</a>
+              <a href="https://ikergalardi.github.io/post/2022-03-08-thought-about-the-linux-desktop/" data-toggle="tooltip" data-placement="top" title="Thoughts on the linux desktop">&larr; Previous Post</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://ikergalardi.github.io/post/2022-03-08-thought-about-the-linux-desktop/" data-toggle="tooltip" data-placement="top" title="Thoughts on the linux desktop">Next Post &rarr;</a>
-            </li>
           
         </ul>
       
