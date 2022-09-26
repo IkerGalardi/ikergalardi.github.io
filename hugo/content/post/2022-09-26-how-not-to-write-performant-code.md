@@ -20,6 +20,6 @@ For everyone trying to enter the optimization world, let me tell you several MUS
 
 - Last but not least, know your tools! Knowing how to work with perf/callgrind and knowing their strengths and weakneses helps make better decisions. This is what I learned with this project: use perf at the start to see the main problem, later dive in the code using callgrind. Callgrind lets you see in better detail how your algorithms are executing so you can easily see if you are doing stupid things. Perf on the other side, lets you see the functions taking the most time (big hint) and hardware specific stuff like branch predictor or cache misses. Don't use just one, they have different strengths.
 
-After all the things learned, it wen't smoothly and the performance was good right? Wrong, it was too late already. The time given for the project was to small, and even though I ended up spending much more time than the permitted, the performance did not improve much. Still, I ended up with a 10, so my writting skills compensated for my coding skills 😉.
+After all the things learned, it went smoothly and the performance was good right? Wrong, it was too late already. The time given for the project was to small, and even though I ended up spending much more time than the permitted, the performance did not improve much. Still, I ended up with a 10, so my writting skills compensated for my coding skills 😉.
 
 It was a fun adventure, and I don't regret anything about the project, but still, next time I try to write good performant code, I'll take my own advice.
