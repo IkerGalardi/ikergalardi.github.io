@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>paradigm on Iker Galardi</title>
+    <link>https://ikergalardi.github.io/tags/paradigm/</link>
+    <description>Recent content in paradigm on Iker Galardi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 04 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/tags/paradigm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data or object oriented? That is the question</title>
+      <link>https://ikergalardi.github.io/post/2022-11-16-data-object-oriented-game/</link>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://ikergalardi.github.io/post/2022-11-16-data-object-oriented-game/</guid>
+      <description>Let me tell you the story of how object oriented programming is not always the way to go. Unless you studied computer science on the 90s, every school, university or bootcamp tries to convince students that object oriented programming is THE BEST and how functional or procedural programming is for old people (I certainly felt that at university).
+Well oh well, data oriented programming is the new kid in town, so what gives?</description>
+    </item>
+    
+  </channel>
+</rss>

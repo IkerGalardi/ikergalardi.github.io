@@ -5,7 +5,17 @@
     <link>https://ikergalardi.github.io/</link>
     <description>Recent content on Iker Galardi</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 26 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data or object oriented? That is the question</title>
+      <link>https://ikergalardi.github.io/post/2022-11-16-data-object-oriented-game/</link>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://ikergalardi.github.io/post/2022-11-16-data-object-oriented-game/</guid>
+      <description>Let me tell you the story of how object oriented programming is not always the way to go. Unless you studied computer science on the 90s, every school, university or bootcamp tries to convince students that object oriented programming is THE BEST and how functional or procedural programming is for old people (I certainly felt that at university).
+Well oh well, data oriented programming is the new kid in town, so what gives?</description>
+    </item>
+    
     <item>
       <title>How not to write performant code</title>
       <link>https://ikergalardi.github.io/post/2022-09-26-how-not-to-write-performant-code/</link>

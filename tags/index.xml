@@ -5,22 +5,40 @@
     <link>https://ikergalardi.github.io/tags/</link>
     <description>Recent content in Tags on Iker Galardi</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 26 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>allocator</title>
-      <link>https://ikergalardi.github.io/tags/allocator/</link>
-      <pubDate>Mon, 26 Sep 2022 00:00:00 +0000</pubDate>
+      <title>gamedev</title>
+      <link>https://ikergalardi.github.io/tags/gamedev/</link>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://ikergalardi.github.io/tags/allocator/</guid>
+      <guid>https://ikergalardi.github.io/tags/gamedev/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>paradigm</title>
+      <link>https://ikergalardi.github.io/tags/paradigm/</link>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://ikergalardi.github.io/tags/paradigm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>project</title>
       <link>https://ikergalardi.github.io/tags/project/</link>
-      <pubDate>Mon, 26 Sep 2022 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate>
       
       <guid>https://ikergalardi.github.io/tags/project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>allocator</title>
+      <link>https://ikergalardi.github.io/tags/allocator/</link>
+      <pubDate>Mon, 26 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://ikergalardi.github.io/tags/allocator/</guid>
       <description></description>
     </item>
     
