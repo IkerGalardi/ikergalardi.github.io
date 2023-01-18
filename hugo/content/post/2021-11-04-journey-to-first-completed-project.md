@@ -26,7 +26,7 @@ So knowing that, I started designing how build scripts would be written. As this
 As you can see, it’s basically programming how the application should be built at the compilation/linking level, giving the all the posibilities needed to create the before mentioned operating system. I know, linking all the source files is missing, just for demostration purposes.
 The journey of building the application
 
-Once I had a basic idea of what functions where needed to build an application I just started writting code. Slowly but surely I started executing lua files with liblua, started giving access to some C++ functions to lua and had a basic prototype running. I worked with linux and unix system calls before, so creating and managing processes was not difficult for me.
+Once I had a basic idea of what functions where needed to build an application I just started writing code. Slowly but surely I started executing lua files with liblua, started giving access to some C++ functions to lua and had a basic prototype running. I worked with linux and unix system calls before, so creating and managing processes was not difficult for me.
 
 Of course, without any planning or previous knowledge of working with lua, for no ones surprise, the code was a mess. Not only that, but I didn’t play with proper modern C++ before, so smart pointers where totally missing, with all the consequences. So the next phase was to back down on all the written code, and fix all the memory leaks and use after frees I had. Finally! After some time of removing all the news and all the mallocs and only using smart pointers, I had a program without any memory leaks!
 
@@ -40,7 +40,7 @@ Using github’s pull request and review system helped me to better organize fea
 At the same time I started using Issues and Projects to keep track on what features I wanted and what features didn’t want. At this point, I started realizing that the first stable version was near.
 LMake 1.0.0
 
-Yay! We’ve got to the first stable version. This was a long journey, with it’s ups and it’s “I want to delete this project from my github repository”. So the questions now become, was it usefull? What’s now going to happen with this project?
+Yay! We’ve got to the first stable version. This was a long journey, with it’s ups and it’s “I want to delete this project from my github repository”. So the questions now become, was it useful? What’s now going to happen with this project?
 
 To the first, actually no. The operating system was abandoned before even having a stable version, and some usability issues didn’t help to this matter. To the second question, I don’t really know! As said before, the interface exposed to the scripts is really verbose and a bit of a pain to work with, and I dont really have any idea on how to improve that.
 Conclusions
