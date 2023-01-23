@@ -1,6 +1,6 @@
 ---
 title: Non exceptional error handling and C++
-date: 2023-01-30
+date: 2023-01-10
 draft: true
 tags: ["experiment", "C++"]
 ---
@@ -127,4 +127,4 @@ Amazing, the code is so concise, and still, you cannot miss error as with the or
 
 I really like how this small error handling experiment turned out, I really think this could be useful, and even more useful when `std::expected` becomes an actual thing in the standard. A big advocate for this type of error handling in C++ is the [SerenityOS project](https://serenityos.org/), which I half copied the implementation of the `TRY` macro from. 
 
-This is all I wanted to talk about for now, there will be probably another follow up post after some time using this error handling mechanism giving more in depth analysis and how viable it is to actually implement and use so stay tuned. Bye!
+This is all I wanted to talk about for now, there will be probably another follow up post after some time using this error handling mechanism giving more in depth analysis and how viable it is to actually implement and use so stay tuned!
