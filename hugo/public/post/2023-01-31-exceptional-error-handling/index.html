@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Non exceptional error handling and C&#43;&#43; - Iker Galardi</title>
+  <meta name="description" content="For the longest time, error handling while programming has been a pain in the ass. Weird and inconsistent ways to detect errors on APIs, global variables to see what actually happened (looking at you, errno), treating errors as exceptional code paths that make it difficult to handle&hellip; you name it. What do you get with this? Confusion, a lot of confusion.
+Error handling should be a very important part of software development, as many can expect, everything (trust me, absolutely everything) can go wrong.">
+  <meta name="author" content="Iker Galardi"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Iker Galardi",
+    
+    "url": "https:\/\/ikergalardi.github.io"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/ikergalardi.github.io"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/ikergalardi.github.io",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/ikergalardi.github.io\/post\/2023-01-31-exceptional-error-handling\/",
+          "name": "Non exceptional error handling and c"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Iker Galardi"
+  },
+  "headline": "Non exceptional error handling and C\u002b\u002b",
+  "description" : "For the longest time, error handling while programming has been a pain in the ass. Weird and inconsistent ways to detect errors on APIs, global variables to see what actually happened (looking at you, errno), treating errors as exceptional code paths that make it difficult to handle\u0026hellip; you name it. What do you get with this? Confusion, a lot of confusion.\nError handling should be a very important part of software development, as many can expect, everything (trust me, absolutely everything) can go wrong.",
+  "inLanguage" : "en",
+  "wordCount":  1319 ,
+  "datePublished" : "2023-01-30T00:00:00",
+  "dateModified" : "2023-01-30T00:00:00",
+  "image" : "https:\/\/ikergalardi.github.io\/img\/avatar.jpeg",
+  "keywords" : [ "experiment, C\u002b\u002b, error-checking" ],
+  "mainEntityOfPage" : "https:\/\/ikergalardi.github.io\/post\/2023-01-31-exceptional-error-handling\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/ikergalardi.github.io",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/ikergalardi.github.io\/img\/avatar.jpeg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Non exceptional error handling and C&#43;&#43;" />
+<meta property="og:description" content="For the longest time, error handling while programming has been a pain in the ass. Weird and inconsistent ways to detect errors on APIs, global variables to see what actually happened (looking at you, errno), treating errors as exceptional code paths that make it difficult to handle&hellip; you name it. What do you get with this? Confusion, a lot of confusion.
+Error handling should be a very important part of software development, as many can expect, everything (trust me, absolutely everything) can go wrong.">
+<meta property="og:image" content="https://ikergalardi.github.io/img/avatar.jpeg" />
+<meta property="og:url" content="https://ikergalardi.github.io/post/2023-01-31-exceptional-error-handling/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Iker Galardi" />
+
+  <meta name="twitter:title" content="Non exceptional error handling and C&#43;&#43;" />
+  <meta name="twitter:description" content="For the longest time, error handling while programming has been a pain in the ass. Weird and inconsistent ways to detect errors on APIs, global variables to see what actually happened (looking at you, …">
+  <meta name="twitter:image" content="https://ikergalardi.github.io/img/avatar.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link href='https://ikergalardi.github.io/img/avatar.jpeg' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.98.0" />
+  <link rel="alternate" href="https://ikergalardi.github.io/index.xml" type="application/rss+xml" title="Iker Galardi"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://ikergalardi.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://ikergalardi.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://ikergalardi.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://ikergalardi.github.io">Iker Galardi</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Projects" href="/page/projects/">Projects</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Iker Galardi" href="https://ikergalardi.github.io">
+            <img class="avatar-img" src="https://ikergalardi.github.io/img/avatar.jpeg" alt="Iker Galardi" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Non exceptional error handling and C&#43;&#43;</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on January 30, 2023
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;7&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1319&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Iker Galardi
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>For the longest time, error handling while programming has been a pain in the ass. Weird and inconsistent ways to detect errors on APIs, global variables to see what actually happened (looking at you, <code>errno</code>), treating errors as exceptional code paths that make it difficult to handle&hellip; you name it. What do you get with this? Confusion, a lot of confusion.</p>
+<p>Error handling should be a very important part of software development, as many can expect, everything (trust me, absolutely everything) can go wrong. Thus, a programmer can expect that error handling is easy and noticable. Ignoring a possible error should be explicit, making it easy to spot possible points of failure. A small <a href="https://www.youtube.com/watch?v=zL-vn_pGGgY">talk by Jason Turner</a> illustrates how important it is to do so when designing an API.</p>
+<p>Let&rsquo;s start our journey on the error handling mechanisms with C. In C, the main error handling mechanism is using <code>errno</code>&hellip; What is <code>errno</code> you might ask. Well, <code>errno</code> is a global variable to represent a possible error. Let&rsquo;s take the <code>open</code> function&rsquo;s man page:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    On success, open(), openat(), and creat() return the new file descriptor 
+</span></span><span class="line"><span class="cl">    (a nonnegative integer). On error, -1 is returned and errno is set to indicate 
+</span></span><span class="line"><span class="cl">    the error.
+</span></span></code></pre></div><p>Let&rsquo;s employ what the man page says, to be as correct as possible when using the <code>open</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&#34;super/cool/file&#34;</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">fd</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">switch</span><span class="p">(</span><span class="n">errno</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Do error handling on specific error           
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Do whatever with the file
+</span></span></span></code></pre></div><p>Amazing, easy to use, impossible to miss&hellip; Yes, there are problems with the <code>errno</code> or <code>GetLastError</code> error handling scheme. What about just using the file descriptor without trying to check any error condition? Does the compiler atleast warn us about that? No, and thats a <strong>BIG</strong> problem, as the API can be misused without even knowing you are doing something wrong. Come on, we have flying machines and hot showers, we can do better than this!</p>
+<p>Indeed, we can do better. What is the next step on improving error handling? Exceptions. Exceptions work by specifying a <code>try</code> block where you program the happy path (as if everything is okay), and a <code>catch</code> block where you catch the actual error:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;filename.txt&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Do whatever with the file
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">myReader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">SpecificException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Do error handling on specific error or propagate upwards
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">}</span>
+</span></span></code></pre></div><p>Failing to create the <code>File</code> object the execution of the <code>try</code> block stops, and starts executing the <code>catch</code> block with information about what happened. This construct lets programmers divide error handling from the algorithm itself and making much more clear what the intent is. Apart from that, as a programmer you can decide to not handle the error in that specific place, and let it bubble up. Building error handling into the language also has the advantage of forcing you to handle it somewhere, which for distracted people like myself, can be a great help.</p>
+<p>Still, this is not the perfect solution either. The word exception itself makes it clear&hellip; error handling is not about handling the special case rarely found, errors happen all the time, and the application must be prepared to handle it. Having specific exceptions per error case can also be a pain to deal with, as the code can be cluttered up with <code>catch</code> blocks. And personally, I don&rsquo;t find it very elegant to suddenly stop the flow of execution.</p>
+<p>So&hellip; whats next? Is there something better? Of course, and rust does it of course, rust is perfect. Rust uses the the convination of its strong type system and generics in order to make error enforced and while maintaining the flow of execution. By adding the pattern matching mechanisms to this, you can do error handling in a very ergonomic way. Let&rsquo;s take a look at an example from the rust documentation about number parsing:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">number_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;10&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">number_str</span><span class="p">.</span><span class="n">parse</span>::<span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">number</span><span class="p">)</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">number</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// Do error handling or propagate upwards
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Do whatever with the number
+</span></span></span></code></pre></div><p>isn&rsquo;t it beautiful? This approach takes the advantages of both approaches by forcing you to handle the error while maintaining the control flow, leading to much cleaner and safer code (in my opinion at least). In addition to this, there is a <code>?</code> operation that lets the error bubble up without much hassle where the same error type is returned.</p>
+<p>This is all well and good, but what happens with my old non-rust codebase? Can I benefit from this new way of handling errors in my C/C++ code? Well, if the code is only C, you&rsquo;re out of luck as there is nothing like generics. If you&rsquo;re using C++ I am coming to the rescue 😉.</p>
+<p>To mimic this type of error handling we&rsquo;re going to take advantage of a <a href="https://github.com/TartanLlama/expected/">small library</a> that tries to comply with the hopefully future new type called <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/p0323r3.pdf"><code>std::expected</code></a> which shamelessly copies rust&rsquo;s <code>Result</code>. With that, and the help of a next small macro we will explore if we can bring the joy of error handling from rust to our beloved C++.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl">    <span class="cp">#define TRY(x)                                          \
+</span></span></span><span class="line"><span class="cl"><span class="cp">            ({                                              \
+</span></span></span><span class="line"><span class="cl"><span class="cp">                auto __error_or_correct = (x);              \
+</span></span></span><span class="line"><span class="cl"><span class="cp">                if(!__error_or_correct.has_value())         \
+</span></span></span><span class="line"><span class="cl"><span class="cp">                    return __error_or_correct.error();      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">                __error_or_correct.value();                 \
+</span></span></span><span class="line"><span class="cl"><span class="cp">            })
+</span></span></span></code></pre></div><p>This macro takes the advantage of the <a href="https://gcc.gnu.org/onlinedocs/gcc-8.1.0/gcc/Statement-Exprs.html#Statement-Exprs">compound statements</a> extension in order to immitate the <code>?</code> operator from rust. Let&rsquo;s put this in practice&hellip; Using the <code>tl::expected</code> object, let&rsquo;s implement a posix <code>open</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl">    <span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">errno_t</span><span class="o">&gt;</span> <span class="n">open</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">path</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span> <span class="n">mode_t</span> <span class="n">mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="n">mode</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">fd</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">tl</span><span class="o">::</span><span class="n">make_unexpected</span><span class="p">(</span><span class="n">errno</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">tl</span><span class="o">::</span><span class="n">make_expected</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>Cool, simple to make, right? What advantages does this have over the traditional way? Not handling the error becomes explicit, making the API harder to use wrongly. Now lets create a function that takes in a path and reads the entire file using the wrapper function we just created:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl">    <span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">errno_t</span><span class="o">&gt;</span> <span class="n">read_entire_file</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">fd_or_error</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">fd_or_error</span><span class="p">.</span><span class="n">has_value</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">tl</span><span class="o">::</span><span class="n">make_unexpected</span><span class="p">(</span><span class="n">fd_or_error</span><span class="p">.</span><span class="n">error</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">fd_or_error</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Do the actual reading of the file...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div><p>Error handling is explicit, cool right? Well, checking manually if there is an error and trying to bubble up the error explicitly is cumbersome, only if there was a macro called <code>TRY</code> that could remove writing the same check and bubble up code every time the same error type is returned&hellip; Right, there is such macro! Lets put it in practice:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl">    <span class="n">tl</span><span class="o">::</span><span class="n">expected</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">errno_t</span><span class="o">&gt;</span> <span class="n">read_entire_file</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">TRY</span><span class="p">(</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Do the actual reading of the file...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div><p>Amazing, the code is so concise, and still, you cannot miss error as with the original posix API. Isn&rsquo;t this <em>perfect</em>? It is in this simple case, but what happens in the case of having a different error type? The <code>TRY</code> macro cannot help us as the type system probably won&rsquo;t know how to convert one error type to another, leaving us the same error handling as without the macro. I have a small solution that I have not tested but seems actually cool&hellip; Errors could be implemented by using <code>enum class</code>-es, making it even harder to missinterpret the actual error value, and this could give us the advantage of creating an operator overload of the casting between one error enum to another, potentially making it completely transparent; but as I said, I have not really tested the solution, so I could be completely wrong.</p>
+<p>I really like how this small error handling experiment turned out, I really think this could be useful, and even more useful when <code>std::expected</code> becomes an actual thing in the standard. A big advocate for this type of error handling in C++ is the <a href="https://serenityos.org/">SerenityOS project</a>, which I half copied the implementation of the <code>TRY</code> macro from.</p>
+<p>This is all I wanted to talk about for now, there will be probably another follow up post after some time using this error handling mechanism giving more in depth analysis and how viable it is to actually implement and use so stay tuned!</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://ikergalardi.github.io/tags/experiment/">experiment</a>&nbsp;
+            
+              <a href="https://ikergalardi.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a>&nbsp;
+            
+              <a href="https://ikergalardi.github.io/tags/error-checking/">error-checking</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2023-01-31-exceptional-error-handling%2f&amp;text=Non%20exceptional%20error%20handling%20and%20C%2b%2b&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fikergalardi.github.io%2fpost%2f2023-01-31-exceptional-error-handling%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2023-01-31-exceptional-error-handling%2f&amp;title=Non%20exceptional%20error%20handling%20and%20C%2b%2b" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2023-01-31-exceptional-error-handling%2f&amp;title=Non%20exceptional%20error%20handling%20and%20C%2b%2b" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2023-01-31-exceptional-error-handling%2f&amp;title=Non%20exceptional%20error%20handling%20and%20C%2b%2b" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fikergalardi.github.io%2fpost%2f2023-01-31-exceptional-error-handling%2f&amp;description=Non%20exceptional%20error%20handling%20and%20C%2b%2b" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://ikergalardi.github.io/post/2022-11-16-data-object-oriented-game/" data-toggle="tooltip" data-placement="top" title="Data or object oriented? That is the question">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/IkerGalardi" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/IkerGalardi" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/user/username" title="Youtube">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="ikergalardi.github.io">Iker Galardi</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2023
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://ikergalardi.github.io">Iker Galardi</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.98.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://ikergalardi.github.io/js/main.js"></script>
+<script src="https://ikergalardi.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://ikergalardi.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

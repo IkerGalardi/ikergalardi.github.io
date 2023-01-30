@@ -92,7 +92,7 @@ The project started with another project, an operating system! Not many people h
   <meta name="twitter:image" content="https://ikergalardi.github.io/img/avatar.jpeg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link href='https://ikergalardi.github.io/img/avatar.jpeg' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.93.3" />
+  <meta name="generator" content="Hugo 0.98.0" />
   <link rel="alternate" href="https://ikergalardi.github.io/index.xml" type="application/rss+xml" title="Iker Galardi"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://ikergalardi.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -281,7 +281,7 @@ The project started with another project, an operating system! Not many people h
 </span></span><span class="line"><span class="cl">    <span class="n">lmake_compile</span><span class="p">(</span><span class="n">source_files</span><span class="p">)</span>
 </span></span></code></pre></div><p>As you can see, it’s basically programming how the application should be built at the compilation/linking level, giving the all the posibilities needed to create the before mentioned operating system. I know, linking all the source files is missing, just for demostration purposes.
 The journey of building the application</p>
-<p>Once I had a basic idea of what functions where needed to build an application I just started writting code. Slowly but surely I started executing lua files with liblua, started giving access to some C++ functions to lua and had a basic prototype running. I worked with linux and unix system calls before, so creating and managing processes was not difficult for me.</p>
+<p>Once I had a basic idea of what functions where needed to build an application I just started writing code. Slowly but surely I started executing lua files with liblua, started giving access to some C++ functions to lua and had a basic prototype running. I worked with linux and unix system calls before, so creating and managing processes was not difficult for me.</p>
 <p>Of course, without any planning or previous knowledge of working with lua, for no ones surprise, the code was a mess. Not only that, but I didn’t play with proper modern C++ before, so smart pointers where totally missing, with all the consequences. So the next phase was to back down on all the written code, and fix all the memory leaks and use after frees I had. Finally! After some time of removing all the news and all the mallocs and only using smart pointers, I had a program without any memory leaks!</p>
 <p>After convincing some of my friends to use LMake on their projects, bugs where found, and after some time, fixed. In this time I realized that the workflow I was using was not letting me develop as fast as I wanted, so I started investigating about how Github’s pull request system works, and how I could take advantage of that.
 Development workflow</p>
@@ -289,7 +289,7 @@ Development workflow</p>
 <p>Using github’s pull request and review system helped me to better organize features, work on multiple features at a time and, I know this sounds weird, review my own code. This point was when I realized that I often write stupid things, and giving me another stage to take a look at the code helped not to directly put those stupid things on the master branch.</p>
 <p>At the same time I started using Issues and Projects to keep track on what features I wanted and what features didn’t want. At this point, I started realizing that the first stable version was near.
 LMake 1.0.0</p>
-<p>Yay! We’ve got to the first stable version. This was a long journey, with it’s ups and it’s “I want to delete this project from my github repository”. So the questions now become, was it usefull? What’s now going to happen with this project?</p>
+<p>Yay! We’ve got to the first stable version. This was a long journey, with it’s ups and it’s “I want to delete this project from my github repository”. So the questions now become, was it useful? What’s now going to happen with this project?</p>
 <p>To the first, actually no. The operating system was abandoned before even having a stable version, and some usability issues didn’t help to this matter. To the second question, I don’t really know! As said before, the interface exposed to the scripts is really verbose and a bit of a pain to work with, and I dont really have any idea on how to improve that.
 Conclusions</p>
 <p>I find a bit tedious to use my own build system, and I don’t really know how to improve that situation… so the project won’t be further developed until I find time and a better design.</p>
@@ -458,7 +458,7 @@ Conclusions</p>
 
           &nbsp;&bull;&nbsp;&copy;
           
-            2022
+            2023
           
 
           
@@ -468,7 +468,7 @@ Conclusions</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.93.3</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.98.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

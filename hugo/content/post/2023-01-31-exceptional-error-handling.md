@@ -1,8 +1,8 @@
 ---
 title: Non exceptional error handling and C++
-date: 2023-01-10
-draft: true
-tags: ["experiment", "C++"]
+date: 2023-01-30
+draft: false
+tags: ["experiment", "C++", "error-checking"]
 ---
 
 For the longest time, error handling while programming has been a pain in the ass. Weird and inconsistent ways to detect errors on APIs, global variables to see what actually happened (looking at you, `errno`), treating errors as exceptional code paths that make it difficult to handle... you name it. What do you get with this? Confusion, a lot of confusion.

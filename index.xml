@@ -5,7 +5,17 @@
     <link>https://ikergalardi.github.io/</link>
     <description>Recent content on Iker Galardi</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 04 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Non exceptional error handling and C&#43;&#43;</title>
+      <link>https://ikergalardi.github.io/post/2023-01-31-exceptional-error-handling/</link>
+      <pubDate>Mon, 30 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ikergalardi.github.io/post/2023-01-31-exceptional-error-handling/</guid>
+      <description>For the longest time, error handling while programming has been a pain in the ass. Weird and inconsistent ways to detect errors on APIs, global variables to see what actually happened (looking at you, errno), treating errors as exceptional code paths that make it difficult to handle&amp;hellip; you name it. What do you get with this? Confusion, a lot of confusion.
+Error handling should be a very important part of software development, as many can expect, everything (trust me, absolutely everything) can go wrong.</description>
+    </item>
+    
     <item>
       <title>Data or object oriented? That is the question</title>
       <link>https://ikergalardi.github.io/post/2022-11-16-data-object-oriented-game/</link>
@@ -23,7 +33,7 @@ Well oh well, data oriented programming is the new kid in town, so what gives?</
       
       <guid>https://ikergalardi.github.io/post/2022-09-26-how-not-to-write-performant-code/</guid>
       <description>Don&amp;rsquo;t you feel like malloc is really slow? Most probably not, as the malloc implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought that I could in 3 moths achieve what glibc achieved in most certainly triple the time. This is the story of how I ended up writing a memory allocator for my end of degree project for university.
-For the last 5 moths I have been writting a hybrid memory allocator using the SLAB allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations.</description>
+For the last 5 moths I have been writing a hybrid memory allocator using the SLAB allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations.</description>
     </item>
     
     <item>

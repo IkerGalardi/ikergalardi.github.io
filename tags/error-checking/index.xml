@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>error-checking on Iker Galardi</title>
+    <link>https://ikergalardi.github.io/tags/error-checking/</link>
+    <description>Recent content in error-checking on Iker Galardi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 30 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/tags/error-checking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Non exceptional error handling and C&#43;&#43;</title>
+      <link>https://ikergalardi.github.io/post/2023-01-31-exceptional-error-handling/</link>
+      <pubDate>Mon, 30 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ikergalardi.github.io/post/2023-01-31-exceptional-error-handling/</guid>
+      <description>For the longest time, error handling while programming has been a pain in the ass. Weird and inconsistent ways to detect errors on APIs, global variables to see what actually happened (looking at you, errno), treating errors as exceptional code paths that make it difficult to handle&amp;hellip; you name it. What do you get with this? Confusion, a lot of confusion.
+Error handling should be a very important part of software development, as many can expect, everything (trust me, absolutely everything) can go wrong.</description>
+    </item>
+    
+  </channel>
+</rss>

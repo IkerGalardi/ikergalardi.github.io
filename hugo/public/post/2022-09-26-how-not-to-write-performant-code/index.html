@@ -9,7 +9,7 @@
 
   <title>How not to write performant code - Iker Galardi</title>
   <meta name="description" content="Don&rsquo;t you feel like malloc is really slow? Most probably not, as the malloc implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought that I could in 3 moths achieve what glibc achieved in most certainly triple the time. This is the story of how I ended up writing a memory allocator for my end of degree project for university.
-For the last 5 moths I have been writting a hybrid memory allocator using the SLAB allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations.">
+For the last 5 moths I have been writing a hybrid memory allocator using the SLAB allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations.">
   <meta name="author" content="Iker Galardi"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,7 +58,7 @@ For the last 5 moths I have been writting a hybrid memory allocator using the SL
     "name" : "Iker Galardi"
   },
   "headline": "How not to write performant code",
-  "description" : "Don\u0026rsquo;t you feel like malloc is really slow? Most probably not, as the malloc implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought that I could in 3 moths achieve what glibc achieved in most certainly triple the time. This is the story of how I ended up writing a memory allocator for my end of degree project for university.\nFor the last 5 moths I have been writting a hybrid memory allocator using the SLAB allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations.",
+  "description" : "Don\u0026rsquo;t you feel like malloc is really slow? Most probably not, as the malloc implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought that I could in 3 moths achieve what glibc achieved in most certainly triple the time. This is the story of how I ended up writing a memory allocator for my end of degree project for university.\nFor the last 5 moths I have been writing a hybrid memory allocator using the SLAB allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations.",
   "inLanguage" : "en",
   "wordCount":  673 ,
   "datePublished" : "2022-09-26T00:00:00",
@@ -81,7 +81,7 @@ For the last 5 moths I have been writting a hybrid memory allocator using the SL
 
 <meta property="og:title" content="How not to write performant code" />
 <meta property="og:description" content="Don&rsquo;t you feel like malloc is really slow? Most probably not, as the malloc implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought that I could in 3 moths achieve what glibc achieved in most certainly triple the time. This is the story of how I ended up writing a memory allocator for my end of degree project for university.
-For the last 5 moths I have been writting a hybrid memory allocator using the SLAB allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations.">
+For the last 5 moths I have been writing a hybrid memory allocator using the SLAB allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations.">
 <meta property="og:image" content="https://ikergalardi.github.io/img/avatar.jpeg" />
 <meta property="og:url" content="https://ikergalardi.github.io/post/2022-09-26-how-not-to-write-performant-code/" />
 <meta property="og:type" content="website" />
@@ -92,7 +92,7 @@ For the last 5 moths I have been writting a hybrid memory allocator using the SL
   <meta name="twitter:image" content="https://ikergalardi.github.io/img/avatar.jpeg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link href='https://ikergalardi.github.io/img/avatar.jpeg' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.93.3" />
+  <meta name="generator" content="Hugo 0.98.0" />
   <link rel="alternate" href="https://ikergalardi.github.io/index.xml" type="application/rss+xml" title="Iker Galardi"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://ikergalardi.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -268,7 +268,7 @@ For the last 5 moths I have been writting a hybrid memory allocator using the SL
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <p>Don&rsquo;t you feel like <code>malloc</code> is really slow? Most probably not, as the <code>malloc</code> implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought that I could in 3 moths achieve what glibc achieved in most certainly triple the time. This is the story of how I ended up writing a memory allocator for my end of degree project for university.</p>
-<p>For the last 5 moths I have been writting a hybrid memory allocator using the <a href="https://people.eecs.berkeley.edu/~kubitron/courses/cs194-24-S14/hand-outs/bonwick_slab.pdf">SLAB</a> allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations. The idea was&hellip; if the SLAB allocator has brought impressive performance improvements on the linux kernel, why can&rsquo;t it have the same performance improvements but for userspace applications? I still think that that&rsquo;s a pretty good premise for a project, but still, the project was a bit of a failure on my heart.</p>
+<p>For the last 5 moths I have been writing a hybrid memory allocator using the <a href="https://people.eecs.berkeley.edu/~kubitron/courses/cs194-24-S14/hand-outs/bonwick_slab.pdf">SLAB</a> allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations. The idea was&hellip; if the SLAB allocator has brought impressive performance improvements on the linux kernel, why can&rsquo;t it have the same performance improvements but for userspace applications? I still think that that&rsquo;s a pretty good premise for a project, but still, the project was a bit of a failure on my heart.</p>
 <p>After several ideas shared with my tutor, the one that we ended up working on was the slab allocator but for userspace. Meaning, that I needed to write a memory allocator (for the first time), and it needed to be <strong>FAST</strong> so I could beat GNU. The project ended up being a fight between me and callgrind/perf in order to discover what was the performance bottleneck on a function that had less than a millisecond of execution time.</p>
 <p>For everyone trying to enter the optimization world, let me tell you several MUSTs in order to have an easier time:</p>
 <ul>
@@ -285,7 +285,7 @@ For the last 5 moths I have been writting a hybrid memory allocator using the SL
 <p>Last but not least, know your tools! Knowing how to work with perf/callgrind and knowing their strengths and weakneses helps make better decisions. This is what I learned with this project: use perf at the start to see the main problem, later dive in the code using callgrind. Callgrind lets you see in better detail how your algorithms are executing so you can easily see if you are doing stupid things. Perf on the other side, lets you see the functions taking the most time (big hint) and hardware specific stuff like branch predictor or cache misses. Don&rsquo;t use just one, they have different strengths.</p>
 </li>
 </ul>
-<p>After all the things learned, it went smoothly and the performance was good right? Wrong, it was too late already. The time given for the project was to small, and even though I ended up spending much more time than the permitted, the performance did not improve much. Still, I ended up with a 10, so my writting skills compensated for my coding skills 😉.</p>
+<p>After all the things learned, it went smoothly and the performance was good right? Wrong, it was too late already. The time given for the project was to small, and even though I ended up spending much more time than the permitted, the performance did not improve much. Still, I ended up with a 10, so my writing skills compensated for my coding skills 😉.</p>
 <p>It was a fun adventure, and I don&rsquo;t regret anything about the project, but still, next time I try to write good performant code, I&rsquo;ll take my own advice.</p>
 
 
@@ -454,7 +454,7 @@ For the last 5 moths I have been writting a hybrid memory allocator using the SL
 
           &nbsp;&bull;&nbsp;&copy;
           
-            2022
+            2023
           
 
           
@@ -464,7 +464,7 @@ For the last 5 moths I have been writting a hybrid memory allocator using the SL
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.93.3</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.98.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
