@@ -5,7 +5,18 @@
     <link>https://ikergalardi.github.io/</link>
     <description>Recent content on Iker Galardi</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 30 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Everything is a file (descriptor)</title>
+      <link>https://ikergalardi.github.io/post/2023-12-13-everything-is-a-file/</link>
+      <pubDate>Wed, 13 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ikergalardi.github.io/post/2023-12-13-everything-is-a-file/</guid>
+      <description>Everything is a file (descriptor) Im sure that most of you who use (or have studied) unix like operating systems like linux or the BSDs know about their philosophy. But when you really think about it, what is that file descriptor thingy? And why would everything be a file?
+Lets find out!
+The origin&amp;hellip; unix! As always, everything old about computer things has to be related to unix. You dont trust me?</description>
+    </item>
+    
     <item>
       <title>Non exceptional error handling and C&#43;&#43;</title>
       <link>https://ikergalardi.github.io/post/2023-01-31-exceptional-error-handling/</link>
@@ -83,7 +94,7 @@ The project started with another project, an operating system! Not many people h
       <guid>https://ikergalardi.github.io/page/projects/</guid>
       <description>Spartan game entine GNU/Linux port (WIP) Port of the Spartan game engine to the GNU/Linux operating system.
 Skills learned:
- Differences on Windows/GNU toolchains  Userspace slab allocator (Finished) Userspace slab allocator to investigate it&amp;rsquo;s usefulness. Project used as my end of degree project.
+ Differences on Windows/GNU toolchains Docker (used for build environments)  Userspace slab allocator (Finished) Userspace slab allocator to investigate it&amp;rsquo;s usefulness. Project used as my end of degree project.
 Skills learned:
  Inner workings of the SLAB allocator Low level userspace linux memory management Writing skills  DTB Parser (Finished) Command line utility for parsing DTB files.</description>
     </item>

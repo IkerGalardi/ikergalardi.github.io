@@ -3,8 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ikergalardi.github.io/</loc>
-    <lastmod>2023-01-30T00:00:00+00:00</lastmod>
+    <lastmod>2023-12-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url><url>
+    <loc>https://ikergalardi.github.io/tags/api/</loc>
+    <lastmod>2023-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ikergalardi.github.io/post/2023-12-13-everything-is-a-file/</loc>
+    <lastmod>2023-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ikergalardi.github.io/tags/posix/</loc>
+    <lastmod>2023-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ikergalardi.github.io/post/</loc>
+    <lastmod>2023-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ikergalardi.github.io/tags/</loc>
+    <lastmod>2023-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ikergalardi.github.io/tags/unix/</loc>
+    <lastmod>2023-12-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ikergalardi.github.io/tags/c&#43;&#43;/</loc>
     <lastmod>2023-01-30T00:00:00+00:00</lastmod>
@@ -16,12 +34,6 @@
     <lastmod>2023-01-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ikergalardi.github.io/post/2023-01-31-exceptional-error-handling/</loc>
-    <lastmod>2023-01-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ikergalardi.github.io/post/</loc>
-    <lastmod>2023-01-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ikergalardi.github.io/tags/</loc>
     <lastmod>2023-01-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ikergalardi.github.io/post/2022-11-16-data-object-oriented-game/</loc>

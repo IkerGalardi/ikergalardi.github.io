@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>unix on Iker Galardi</title>
+    <link>https://ikergalardi.github.io/tags/unix/</link>
+    <description>Recent content in unix on Iker Galardi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 13 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/tags/unix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Everything is a file (descriptor)</title>
+      <link>https://ikergalardi.github.io/post/2023-12-13-everything-is-a-file/</link>
+      <pubDate>Wed, 13 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ikergalardi.github.io/post/2023-12-13-everything-is-a-file/</guid>
+      <description>Everything is a file (descriptor) Im sure that most of you who use (or have studied) unix like operating systems like linux or the BSDs know about their philosophy. But when you really think about it, what is that file descriptor thingy? And why would everything be a file?
+Lets find out!
+The origin&amp;hellip; unix! As always, everything old about computer things has to be related to unix. You dont trust me?</description>
+    </item>
+    
+  </channel>
+</rss>

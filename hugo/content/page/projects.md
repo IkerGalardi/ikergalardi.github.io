@@ -8,6 +8,7 @@ Port of the Spartan game engine to the GNU/Linux operating system.
 
 Skills learned:
 - Differences on Windows/GNU toolchains
+- Docker (used for build environments)
 
 ## Userspace slab allocator (Finished)
 Userspace slab allocator to investigate it's usefulness. Project used as my end of degree project. 

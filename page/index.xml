@@ -22,7 +22,7 @@
       <guid>https://ikergalardi.github.io/page/projects/</guid>
       <description>Spartan game entine GNU/Linux port (WIP) Port of the Spartan game engine to the GNU/Linux operating system.
 Skills learned:
- Differences on Windows/GNU toolchains  Userspace slab allocator (Finished) Userspace slab allocator to investigate it&amp;rsquo;s usefulness. Project used as my end of degree project.
+ Differences on Windows/GNU toolchains Docker (used for build environments)  Userspace slab allocator (Finished) Userspace slab allocator to investigate it&amp;rsquo;s usefulness. Project used as my end of degree project.
 Skills learned:
  Inner workings of the SLAB allocator Low level userspace linux memory management Writing skills  DTB Parser (Finished) Command line utility for parsing DTB files.</description>
     </item>
