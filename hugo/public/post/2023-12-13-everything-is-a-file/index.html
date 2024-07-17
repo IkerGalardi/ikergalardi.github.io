@@ -61,7 +61,7 @@ The origin&hellip; unix! As always, everything old about computer things has to 
   "headline": "Everything is a file (descriptor)",
   "description" : "Everything is a file (descriptor) Im sure that most of you who use (or have studied) unix like operating systems like linux or the BSDs know about their philosophy. But when you really think about it, what is that file descriptor thingy? And why would everything be a file?\nLets find out!\nThe origin\u0026hellip; unix! As always, everything old about computer things has to be related to unix. You dont trust me?",
   "inLanguage" : "en",
-  "wordCount":  1453 ,
+  "wordCount":  1488 ,
   "datePublished" : "2023-12-13T00:00:00",
   "dateModified" : "2023-12-13T00:00:00",
   "image" : "https:\/\/ikergalardi.github.io\/img\/avatar.jpeg",
@@ -243,7 +243,7 @@ The origin&hellip; unix! As always, everything old about computer things has to 
     &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;7&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1453&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1488&nbsp;words
   
   
     
@@ -309,6 +309,9 @@ The origin&hellip; unix! As always, everything old about computer things has to 
 <p>This is probably not going to change on the posix/unixy world. Posix2 might be able to solve this issue, but in the mean time, what can we do with our current APIs? Let&rsquo;s propose a solution!</p>
 <p>In similar ways to the memfd and timerfd APIs, why don&rsquo;t we create a procfd familly of functions that fixes the synchronization inconsistencies?</p>
 <p>First, we need to define a way to retrieve one of these proc file descriptors. Following the timerfd way, the easiest solution would be to create a <code>procfd_create</code> function that takes the process id as an argument. I would argue that this is the most straight forward way to design an API, but I would go one step further and create the file descriptor by opening the <code>/proc/&lt;pid&gt;</code> directory.</p>
+<blockquote>
+<p>NOTE: Aparently there is a similar interface called <code>pidfd</code> with witch you can <code>pidfd_open</code> a process id to get a file descriptor related to the process. Includes functions like <code>pidfd_send_signal</code> to replace the traditional API.</p>
+</blockquote>
 <p>Now with this file descriptor, socket like semantics can apply to the <code>(e)poll</code>/<code>select</code> functions and the event loop would function as expected! Ptrace (and process related functions) can be turned into <code>ioctls</code> in order to improve consistency. Of course, the &ldquo;old way&rdquo; of doing things doesn&rsquo;t need to be removed, as that would break compatibility for no reason. Maybe posix2 can remove those instead of just marking them as deprecated.</p>
 <h2 id="conclusions-and-possible-experiments">Conclusions and possible experiments</h2>
 <p>It would be nice to create some kind of experiment where a kernel could be modified in order to provide the mentioned alternative and test real benefits on the mentioned API improvements. The changes could be simple syscall additions that would redirect, for example, the ptrace related procfd ioctls to the real ptrace syscall functions. But that&rsquo;s a proyect for another time!</p>
@@ -386,6 +389,17 @@ The origin&hellip; unix! As always, everything old about computer things has to 
 
         
           
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/post/2024-07-17-how-cat-works/">Unix utilities, how cat works</a></li>
+                
+              </ul>
 
           
         
@@ -398,6 +412,10 @@ The origin&hellip; unix! As always, everything old about computer things has to 
               <a href="https://ikergalardi.github.io/post/2023-01-31-exceptional-error-handling/" data-toggle="tooltip" data-placement="top" title="Non exceptional error handling and C&#43;&#43;">&larr; Previous Post</a>
             </li>
           
+          
+            <li class="next">
+              <a href="https://ikergalardi.github.io/post/2024-07-17-how-cat-works/" data-toggle="tooltip" data-placement="top" title="Unix utilities, how cat works">Next Post &rarr;</a>
+            </li>
           
         </ul>
       
@@ -463,7 +481,7 @@ The origin&hellip; unix! As always, everything old about computer things has to 
 
           &nbsp;&bull;&nbsp;&copy;
           
-            2023
+            2024
           
 
           

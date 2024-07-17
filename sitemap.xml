@@ -3,22 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ikergalardi.github.io/</loc>
-    <lastmod>2023-12-13T00:00:00+00:00</lastmod>
+    <lastmod>2024-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url><url>
     <loc>https://ikergalardi.github.io/tags/api/</loc>
-    <lastmod>2023-12-13T00:00:00+00:00</lastmod>
+    <lastmod>2024-07-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://ikergalardi.github.io/post/2023-12-13-everything-is-a-file/</loc>
-    <lastmod>2023-12-13T00:00:00+00:00</lastmod>
+    <loc>https://ikergalardi.github.io/tags/coreutils/</loc>
+    <lastmod>2024-07-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ikergalardi.github.io/tags/posix/</loc>
-    <lastmod>2023-12-13T00:00:00+00:00</lastmod>
+    <lastmod>2024-07-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ikergalardi.github.io/post/</loc>
-    <lastmod>2023-12-13T00:00:00+00:00</lastmod>
+    <lastmod>2024-07-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ikergalardi.github.io/tags/</loc>
+    <lastmod>2024-07-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ikergalardi.github.io/post/2024-07-17-how-cat-works/</loc>
+    <lastmod>2024-07-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://ikergalardi.github.io/post/2023-12-13-everything-is-a-file/</loc>
     <lastmod>2023-12-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://ikergalardi.github.io/tags/unix/</loc>

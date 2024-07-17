@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>coreutils on Iker Galardi</title>
+    <link>https://ikergalardi.github.io/tags/coreutils/</link>
+    <description>Recent content in coreutils on Iker Galardi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 17 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ikergalardi.github.io/tags/coreutils/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unix utilities, how cat works</title>
+      <link>https://ikergalardi.github.io/post/2024-07-17-how-cat-works/</link>
+      <pubDate>Wed, 17 Jul 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://ikergalardi.github.io/post/2024-07-17-how-cat-works/</guid>
+      <description>Introduction At university we had an introduction to operating systems course where we basically learnt how basic unix utilities like cat, ls, etc, worked by programming them in C using the unix API.
+This course was kind of mind blowing as I never touched such low level APIs, and kind of broke the illusion that system&amp;rsquo;s programming involves some kind of black magic and Einstein level brainpower. So with this article series I want to re-remember those lessons in the hopes that someone can also break that barrier to learning this kind of low level stuff.</description>
+    </item>
+    
+  </channel>
+</rss>

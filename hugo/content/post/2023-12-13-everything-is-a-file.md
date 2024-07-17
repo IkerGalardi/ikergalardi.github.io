@@ -69,6 +69,8 @@ In similar ways to the memfd and timerfd APIs, why don't we create a procfd fami
 
 First, we need to define a way to retrieve one of these proc file descriptors. Following the timerfd way, the easiest solution would be to create a `procfd_create` function that takes the process id as an argument. I would argue that this is the most straight forward way to design an API, but I would go one step further and create the file descriptor by opening the `/proc/<pid>` directory.
 
+> NOTE: Aparently there is a similar interface called `pidfd` with witch you can `pidfd_open` a process id to get a file descriptor related to the process. Includes functions like `pidfd_send_signal` to replace the traditional API.
+
 Now with this file descriptor, socket like semantics can apply to the `(e)poll`/`select` functions and the event loop would function as expected! Ptrace (and process related functions) can be turned into `ioctls` in order to improve consistency. Of course, the "old way" of doing things doesn't need to be removed, as that would break compatibility for no reason. Maybe posix2 can remove those instead of just marking them as deprecated.
 
 ## Conclusions and possible experiments
