@@ -1,0 +1,57 @@
+:root {
+    --background0: #ffffff;
+    --background1: #ffffff;
+    --background2: #eceff4;
+    --text: #222222;
+    --text-link: #5e81ac;
+}
+
+body {
+    background-color: var(--background0);
+    margin: 20px auto;
+    max-width: 820px;
+    line-height: 1.5;
+    font-size: 18px;
+    color: var(--text);
+    padding: 0px 10px;
+}
+
+article {
+    background-color: var(--background1);
+    padding: 10px 10px;
+    text-align: justify;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px grey;
+    padding: 20px 20px;
+}
+
+pre {
+    background-color: var(--background2);
+    border-radius: 10px;
+}
+code {
+    font-size: 16px;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+    text-align: center;
+}
+
+a {
+    color: var(--text-link);
+}
+a:visited {
+    color: var(--text-link);
+}
+
+footer {
+    margin: 10px;
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+}
