@@ -16,7 +16,7 @@ body {
     padding: 0px 10px;
 }
 
-article {
+.square {
     background-color: var(--background1);
     padding: 10px 10px;
     text-align: justify;
