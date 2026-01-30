@@ -69,5 +69,13 @@ for filename in os.listdir(directory):
 
 posts_metadata.sort(reverse=True)
 
-for metadata in posts_metadata:
-    print_metadata(metadata)
+
+global_template = open("template/global.html", "r").read()
+post_template = open("template/post_miniature.html", "r").read()
+
+post_list_html: str = ""
+for post in posts_metadata:
+    post_html = post_template.format(post.title, post.first_paragraph, post.publication)
+    post_list_html += post_html + "\n"
+
+print(global_template.format("Iker Galardi - Posts", post_list_html))
