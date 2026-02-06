@@ -5,6 +5,8 @@ draft: false
 tags: ["experiment", "C++", "error-checking"]
 ---
 
+# Non exceptional error handling and C++
+
 For the longest time, error handling while programming has been a pain in the ass. Weird and inconsistent ways to detect errors on APIs, global variables to see what actually happened (looking at you, `errno`), treating errors as exceptional code paths that make it difficult to handle... you name it. What do you get with this? Confusion, a lot of confusion.
 
 Error handling should be a very important part of software development, as many can expect, everything (trust me, absolutely everything) can go wrong. Thus, a programmer can expect that error handling is easy and noticable. Ignoring a possible error should be explicit, making it easy to spot possible points of failure. A small [talk by Jason Turner](https://www.youtube.com/watch?v=zL-vn_pGGgY) illustrates how important it is to do so when designing an API.

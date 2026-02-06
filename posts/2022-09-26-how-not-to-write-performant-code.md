@@ -4,6 +4,8 @@ date: 2022-09-26
 tags: ["allocator", "project"]
 ---
 
+# How not to write performant code 
+
 Don't you feel like `malloc` is really slow? Most probably not, as the `malloc` implementation shipped on most standard libraries are probably older than me. Still, a fool past of myself thought that I could in 3 moths achieve what glibc achieved in most certainly triple the time. This is the story of how I ended up writing a memory allocator for my end of degree project for university.
 
 For the last 5 moths I have been writing a hybrid memory allocator using the [SLAB](https://people.eecs.berkeley.edu/~kubitron/courses/cs194-24-S14/hand-outs/bonwick_slab.pdf) allocator used on most operating system kernels and what the operating system provides in order to accelerate memory allocations. The idea was... if the SLAB allocator has brought impressive performance improvements on the linux kernel, why can't it have the same performance improvements but for userspace applications? I still think that that's a pretty good premise for a project, but still, the project was a bit of a failure on my heart.

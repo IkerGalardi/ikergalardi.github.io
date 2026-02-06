@@ -5,6 +5,8 @@ draft: false
 tags: ["paradigm", "gamedev", "project"]
 ---
 
+# Data or object oriented? That is the question
+
 Let me tell you the story of how object oriented programming is not always the way to go. Unless you studied computer science on the 90s, every school, university or bootcamp tries to convince students that object oriented programming is **THE BEST** and how functional or procedural programming is for old people (I certainly felt that at university).
 
 Well oh well, data oriented programming is the new kid in town, so what gives? That's a question I've tried to evade for a while until I started my new game project. Let's start from the beginning... What is object oriented programming?

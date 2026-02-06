@@ -5,6 +5,8 @@ draft: false
 tags: ["posix", "api", "coreutils"]
 ---
 
+# Unix utilities, how cat works
+
 ## Introduction
 At university we had an *introduction to operating systems* course where we basically learnt how basic unix utilities like `cat`, `ls`, etc, worked by programming them in C using the unix API.
 
