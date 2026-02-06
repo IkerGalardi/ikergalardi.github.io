@@ -13,14 +13,14 @@ The project started with another project, an operating system! Not many people h
 So knowing that, I started designing how build scripts would be written. As this project was needed to build very customized applications, I decided to design on a command description + execution schema. What does this mean? Let’s take a closer look with an example script:
 
 ``` lua
-    -- Configure the build command
-    lmake_set_compiler("gcc")
-    lmake_set_compiler_flags("-O2 -ftree-vectorize")
-    lmake_set_compiler_out("bin/%.o")
+-- Configure the build command
+lmake_set_compiler("gcc")
+lmake_set_compiler_flags("-O2 -ftree-vectorize")
+lmake_set_compiler_out("bin/%.o")
 
-    -- Gather all the C files and compile them
-    local source_files = lmake_find("src/**.c")
-    lmake_compile(source_files)
+-- Gather all the C files and compile them
+local source_files = lmake_find("src/**.c")
+lmake_compile(source_files)
 ```          
 
 As you can see, it’s basically programming how the application should be built at the compilation/linking level, giving the all the posibilities needed to create the before mentioned operating system. I know, linking all the source files is missing, just for demostration purposes.

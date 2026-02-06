@@ -44,8 +44,8 @@ To open a file we conveniently use the `open`function call:
 ```C
 int fd = open(filepath, 0, O_RDONLY);
 if (fd < 0) {
-	perror("open");
-	exit(1);
+    perror("open");
+    exit(1);
 }
 ```
 Let's break down what the above code snippet does. First we have a call to the `open` function that takes the next parameters:
@@ -61,8 +61,8 @@ To read or write to or from a file we simply use the appropriate `read` or `writ
 char buffer[100] = {0}
 ssize_t rc = read(fd, buffer, 100);
 if (rc < 0) {
-	perror("read");
-	exit(1);
+    perror("read");
+    exit(1);
 }
 ```
 
@@ -97,17 +97,17 @@ The typical use case for `cat` is simply reading the files passed from the comma
 Where do we take the command line arguments? Have you ever wondered what those `argc` and `argv` parameters are in the main function? They are actually the argument count (`argc`) and the actual arguments(`argv`)! Knowing this, we can simply loop on the command line arguments and apply the before mentioned process:
 
 ```C
-	for (int i = 0; i < argc; i++) {
-		int fd = open(filepath, 0, O_RDONLY);
-		
-		struct stat statbuf;
-		fstat(fd, &statbuf);
-		
-		char *buf = malloc(statbuf.st_size);
-		read(fd, buf, statbuf.st_size);
-		write(STDOUT_FILENO, buf, rc);
-		free(buf);
-	}
+for (int i = 0; i < argc; i++) {
+	int fd = open(filepath, 0, O_RDONLY);
+	
+	struct stat statbuf;
+	fstat(fd, &statbuf);
+	
+	char *buf = malloc(statbuf.st_size);
+	read(fd, buf, statbuf.st_size);
+	write(STDOUT_FILENO, buf, rc);
+	free(buf);
+}
 ```
 For the sake of simplicity I've removed all error checking so that its simpler to read and understand, but the full error checked version can be found on the [github repository](https://github.com/IkerGalardi/learn-posix/blob/main/cat.c).
 
