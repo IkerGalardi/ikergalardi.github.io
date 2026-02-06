@@ -7,11 +7,14 @@ HTML_PAGES=build/posts/2021-11-04-journey-to-first-completed-project.html \
 		   build/posts/2023-12-13-everything-is-a-file.html \
 		   build/posts/2024-07-17-how-cat-works.html
 
-all: $(HTML_PAGES)
+all: build/posts/index.html $(HTML_PAGES)
 
 build/posts/%.html: posts/%.md
 	python3 tools/remove_md_tags.py $< | cmark --to html > $@
 	python3 tools/apply_template.py --type post $@
 
+build/posts/index.html: $(HTML_PAGES)
+	python3 tools/generate_post_index.py > build/posts/index.html
+
 clean:
-	rm -rf build/posts/*.html
+	rm -rf $(HTML_PAGES) build/posts/index.html

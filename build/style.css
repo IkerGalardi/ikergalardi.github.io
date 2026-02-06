@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: var(--background0);
+    background-color: var(--background2);
     margin: 20px auto;
     max-width: 820px;
     line-height: 1.5;
@@ -18,11 +18,21 @@ body {
 
 .square {
     background-color: var(--background1);
-    padding: 10px 10px;
+    margin-bottom: 20px;
     text-align: justify;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px grey;
+    box-shadow: 0px 0px 10px #d8dee9;
     padding: 20px 20px;
+}
+
+.miniature {
+    background-color: var(--background1);
+    margin-bottom: 20px;
+    text-align: justify;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #d8dee9;
+    padding: 20px 20px;
+    cursor: pointer;
 }
 
 pre {

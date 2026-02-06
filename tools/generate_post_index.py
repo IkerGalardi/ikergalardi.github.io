@@ -3,10 +3,11 @@ from datetime import date
 
 
 class PostMetadata:
-    def __init__(self, publication: date, title: str, first_paragraph: str):
+    def __init__(self, publication: date, title: str, first_paragraph: str, path: str):
         self.publication = publication
         self.title = title
         self.first_paragraph = first_paragraph
+        self.path = path
 
     def __lt__(self, other):
         return self.publication < other.publication
@@ -58,7 +59,9 @@ def extract_metadata(file: str) -> PostMetadata:
     assert publication is not None
     assert first_paragraph is not None
 
-    return PostMetadata(publication, title, first_paragraph)
+    posturl = file.split("/")[1].replace(".md", ".html")
+
+    return PostMetadata(publication, title, first_paragraph, posturl)
 
 
 posts_metadata = []
@@ -75,7 +78,9 @@ post_template = open("template/post_miniature.html", "r").read()
 
 post_list_html: str = ""
 for post in posts_metadata:
-    post_html = post_template.format(post.title, post.first_paragraph, post.publication)
+    post_html = post_template.format(
+        post.path, post.title, post.first_paragraph, post.publication
+    )
     post_list_html += post_html + "\n"
 
 print(global_template.format("Iker Galardi - Posts", post_list_html))
