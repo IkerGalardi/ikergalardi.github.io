@@ -29,13 +29,15 @@ What a title! Yes, I feel this solution actually will hold on until I consider t
 With that simple design, we can define scenes easily like a collection of entities. With this simple design, we can also add functionality really simply by adding new systems. That's it! Let's look at a simple example on how rendering works currently:
 
 ```C++
-const auto& view = m_world_manager.registry().view<Transform, Sprite>();
+const auto& registry = m_world_manager.registry();
+const auto& view = registry.view<Transform, Sprite>();
 for(const auto& entity : view)
 {
-    const auto& transform = m_world_manager.registry().get<Transform>(entity);
-    const auto& sprite = m_world_manager.registry().get<Sprite>(entity);
+    const auto& transform = registry.get<Transform>(entity);
+    const auto& sprite = registry.get<Sprite>(entity);
     
-    m_renderer.render_texture_quad(transform.position, sprite.texture);
+    m_renderer.render_texture_quad(transform.position,
+                                   sprite.texture);
 }
 ```
 

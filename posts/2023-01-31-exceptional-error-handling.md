@@ -13,11 +13,8 @@ Error handling should be a very important part of software development, as many 
 
 Let's start our journey on the error handling mechanisms with C. In C, the main error handling mechanism is using `errno`... What is `errno` you might ask. Well, `errno` is a global variable to represent a possible error. Let's take the `open` function's man page:
 
-```
-On success, open(), openat(), and creat() return the new file descriptor 
-(a nonnegative integer). On error, -1 is returned and errno is set to indicate 
-the error.
-```
+
+> On success, open(), openat(), and creat() return the new file descriptor  (a nonnegative integer). On error, -1 is returned and errno is set to indicate  the error.
 
 Let's employ what the man page says, to be as correct as possible when using the `open` function:
 
@@ -85,7 +82,9 @@ To mimic this type of error handling we're going to take advantage of a [small l
 This macro takes the advantage of the [compound statements](https://gcc.gnu.org/onlinedocs/gcc-8.1.0/gcc/Statement-Exprs.html#Statement-Exprs) extension in order to immitate the `?` operator from rust. Let's put this in practice... Using the `tl::expected` object, let's implement a posix `open` function:
 
 ```C++
-tl::expected<int, errno_t> open(const char* path, int flags, mode_t mode)
+tl::expected<int, errno_t> open(const char* path,
+                                int flags,
+                                mode_t mode)
 {
     int fd = open(path, flags, mode);
     if(fd == -1)
