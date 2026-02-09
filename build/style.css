@@ -16,6 +16,10 @@ body {
     padding: 0px 10px;
 }
 
+hr {
+    color: #d8dee9;
+}
+
 .square {
     background-color: var(--background1);
     margin-bottom: 20px;
