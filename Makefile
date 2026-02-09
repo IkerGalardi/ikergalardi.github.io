@@ -7,7 +7,11 @@ HTML_PAGES=build/posts/2021-11-04-journey-to-first-completed-project.html \
 		   build/posts/2023-12-13-everything-is-a-file.html \
 		   build/posts/2024-07-17-how-cat-works.html
 
-all: build/posts/index.html $(HTML_PAGES)
+all: build/posts/index.html $(HTML_PAGES) build/index.html
+
+build/index.html: pages/home.html
+	cp pages/home.html build/index.html
+	python3 tools/apply_template.py --type empty $@
 
 build/posts/%.html: posts/%.md
 	python3 tools/remove_md_tags.py $< | cmark --to html > $@
