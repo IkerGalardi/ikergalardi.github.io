@@ -28,6 +28,15 @@ if args.type == "post":
     post_file.seek(0)
     post_file.truncate(0)
     post_file.write(intermediate.format(file_contents))
+elif args.type == "empty":
+    post_file = open(args.file, "r+")
+
+    title = basename(args.file)
+    file_contents = post_file.read()
+
+    post_file.seek(0)
+    post_file.truncate(0)
+    post_file.write(global_template.format(title, file_contents))
 
 elif args.type == "post-list":
     eprint("apply_template: 'post-list' currently unsupported")
