@@ -44,7 +44,7 @@ hr {
 }
 
 .miniature {
-    background-color: var(--shadow-color);
+    background-color: var(--background1);
     margin-bottom: 20px;
     text-align: justify;
     border-radius: 10px;
