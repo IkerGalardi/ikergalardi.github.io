@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Iker Galardi - 2022-11-16-data-object-oriented-game.html</title>
+        <link rel="stylesheet" href="/style.css" />
+    </head>
+    <body>
+        <nav>
+            <h1 class="title">Iker Galardi</h1>
+            <h3 class="title">
+                <a href="/">home</a> · <a href="/posts">posts</a>
+            </h3>
+        </nav>
+
+        <article class="square"><h1>Data or object oriented? That is the question</h1>
+<p>Let me tell you the story of how object oriented programming is not always the way to go. Unless you studied computer science on the 90s, every school, university or bootcamp tries to convince students that object oriented programming is <strong>THE BEST</strong> and how functional or procedural programming is for old people (I certainly felt that at university).</p>
+<p>Well oh well, data oriented programming is the new kid in town, so what gives? That's a question I've tried to evade for a while until I started my new game project. Let's start from the beginning... What is object oriented programming?</p>
+<h2>Object oriented programming</h2>
+<p>Object oriented programming is a paradigm based on objects, which contain data and code to modify that data. Convining data and code into objects lets programmers abstract away complex concepts, and thus, simplifying development. That's the theory told by experts and random webpages, is that real? Let me tell you the story of how game development lead me to obsess with clean design and design patters.</p>
+<p>A couple of months ago I started a remake of an old gameboy game I like a lot and for which sprites are (not legally) available. So I said, why not try to recreate and try to learn a few things along the way like <code>cmake</code> and post processing using OpenGL. At the moment, I already was a bit obsesed with software architecture and clean design, so what about playing god and trying to plan all the game software architecture from the start.</p>
+<p>There comes the big error that even professional software developers have, over engineering and over abstracting. Abstractions and encapsulation do actually help build more complex, but do you know what happens when you over engineer and over abstract? Noise, a lot of noise. That makes the project difficult to read and maintain.</p>
+<p>During the preparantion process a recapitulation of all the features was made, and with that and drawio I started to plan all the classes, libraries and design decisions. What did that lead to? 5 libraries that could easily be included in just one (or even none, who needs libraries?), inheritance because <em>&quot;maybe in the future we could have multiple of these&quot;</em>... Currently, as I'm writing this post, the engine is a bit of a mess that needs to be solved before even continuing (I'm ashamed to admit this, refactoring on a 2 months old project just because I wanted to feel smart at the start).</p>
+<p>Still, what I've mentioned untill now is only my fault; What did object oriented programming do in all these shenanigans? Well, let me share with you a <a href="https://www.youtube.com/watch?v=aKLntZcp27M">talk about rust game development which focuses</a> which will better explain how object oriented programming can help your game code be a pain and how to solve it with data oriented programming.</p>
+<h2>Yet another perfect solution, but actually yes this time and situation</h2>
+<p>What a title! Yes, I feel this solution actually will hold on until I consider the project. Applying data oriented design into games turns out to have another name: entity component system. Entities hold components, components hold data, and systems modify and do things with that data.</p>
+<p>With that simple design, we can define scenes easily like a collection of entities. With this simple design, we can also add functionality really simply by adding new systems. That's it! Let's look at a simple example on how rendering works currently:</p>
+<pre><code class="language-C++">const auto&amp; registry = m_world_manager.registry();
+const auto&amp; view = registry.view&lt;Transform, Sprite&gt;();
+for(const auto&amp; entity : view)
+{
+    const auto&amp; transform = registry.get&lt;Transform&gt;(entity);
+    const auto&amp; sprite = registry.get&lt;Sprite&gt;(entity);
+    
+    m_renderer.render_texture_quad(transform.position,
+                                   sprite.texture);
+}
+</code></pre>
+<p>Adding new systems becomes as easy as adding similar pieces of code but with the specific components needed for that system.</p>
+<h2>Conclusions</h2>
+<p>Not much more to say, I'm in the honeymoon phase with this. Soon I'll open source the engine and game code, but still, I need to sort out some issues like refactoring and supporting windows so that more people can see and play the game.</p>
+</article>
+
+
+        <footer>
+            <a href="https://x.com/ikergalardi">twitter</a> ·
+            <a href="https://www.linkedin.com/in/iker-galardi/">linkedin</a> ·
+            <a href="https://github.com/IkerGalardi">github</a>
+        </footer>
+    </body>
+</html>

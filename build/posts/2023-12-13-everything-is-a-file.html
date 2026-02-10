@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Iker Galardi - 2023-12-13-everything-is-a-file.html</title>
+        <link rel="stylesheet" href="/style.css" />
+    </head>
+    <body>
+        <nav>
+            <h1 class="title">Iker Galardi</h1>
+            <h3 class="title">
+                <a href="/">home</a> · <a href="/posts">posts</a>
+            </h3>
+        </nav>
+
+        <article class="square"><h1>Everything is a file (descriptor)</h1>
+<p>Im sure that most of you who use (or have studied) unix like operating systems like linux or the BSDs know about their philosophy. But when you really think about it, what is that file descriptor thingy? And why would everything be a file?</p>
+<p>Lets find out!</p>
+<h2>The origin... unix!</h2>
+<p>As always, everything old about computer things has to be related to unix. You dont trust me? Well what about time management? Have you heard about the the unix time? What about C? And the posix API? I hope that you can now understand why Im talking about unix.</p>
+<p>Unix developer had this funny idea of having access to everything on a computer via files in the file system. Want to access the terminal? Well, just interact with <code>/dev/tty</code> file in the filesystem. Want to interact with the printing device? Just use the <code>/dev/lp</code> (short for Line Printer maybe?). Want to check what devices are connected to the machine? Simply ls /dev/! Magical right?</p>
+<p>NOTE: Other systems such as microsoft have similar mechanisms by having a separate magical file system on \Devices. But isnt accessible from the users perspective.</p>
+<p>Looks great from the terminal's point of view, but how are those files used?</p>
+<h2>Unix filesystem API</h2>
+<p>Accessing files in a unix program is really simple! Just open the file, read or write whatever buffer and the kernel will take care of the rest!</p>
+<p>The next are the functions used for that:</p>
+<ul>
+<li><code>open</code>: given a path and intentions (want to write, read, both?), open the file and return a file descriptor (that descriptor thing again!)</li>
+<li><code>write</code>: given a file descriptor and a buffer, write that buffer to the file represented by the file descriptor.</li>
+<li><code>read</code>: given a file descriptor and a buffer, read data from the file represented by a file descriptor.</li>
+<li><code>seek</code>: given a file descriptor and a position, move the cursor to that point. The function returns the new position, so by not moving the cursor you can use the same function to retrieve the cursor position.</li>
+<li><code>close</code>: given a file descriptor, closes the file refered to by the filed descriptor. Its more of a hint to the OS telling it that were no longer using the file.</li>
+</ul>
+<p>Cool, but how do you tell the terminal device that you want to write characters to the screen? Isn't it obvious (and beautiful)? Just use the above functions and the OS will do its magic and it <em>Just Works™</em>. Even sockets are file descriptors that can use those functions (although <code>send</code>/<code>recv</code> are preferred to <code>write</code>/<code>read</code>).</p>
+<p>Nice! Simple! Some even might say elegant! Thats until you want to, for example, retrieve the terminal size... Just use read! Well, then how are you going to differentiate someone typing on the terminal vs retriving terminal information! You could create some kind of protocol to comminicate with the terminal, so a convination of write <em>GetTerminalSize</em> packet + read <em>TerminalSize</em> packet could solve it, but thats too ugly and cumbersome...</p>
+<p>So what if we add some kind of swiss army knife function used for these kinds of situations where the semantics of <code>read</code>/<code>write</code>/<code>seek</code> break? The unix guys basically created something called <code>ioctl</code> (IO control for short, pronounced ioctal by psychopaths) that basically takes a buffer as input and outputs a buffer. Giving total freedom to the specific device on how to interpret those buffers. The real function also takes an additional command parameter to simplify the driver implementors lives.</p>
+<p>With this, we could use the ioctl function passing the <code>GetSize</code> command and receive the terminal size on the output buffer.</p>
+<h2>Blocking and synchronization</h2>
+<p>When reading from a file descriptor, the process gets blocked until the data is available. In the case of files, until the disk data is actually on the main memory; whereas in the case of sockets until some data has arrieved from the network. What about devices? It totally depends on the driver.</p>
+<p>So what happens when a network server needs to listen from multiple sockets at the same time? We need a synchronization mechanism to wait on multiple sockets and when data arrieves, tell us where we should read. Thats when an ancient function called <code>select</code> was created.</p>
+<p>You can basically pass a maximum of 1024 of file descriptor, and the process will get blocked until something happens! Briliant. Later other interfaces like <code>poll</code> (and an extended linux specific version <code>epoll</code>) came in to circumbent all the shortcomings of select.</p>
+<h2>What else does use file descriptors?</h2>
+<p>There is another really handy interface that is entirelly based on file descriptors... inotify! Inotify is an API used basically for getting notifications when files change. With this API you can get file descriptors from which you can read from changes in metadata to changes in the file data itself. The usage of <code>select</code>, <code>(e)poll</code> is basically obligatory when trying to keep track of multiple files.</p>
+<p>As such, there are more file descriptor based APIs: timerfd, pretty self explanatory; memfd to use (and share) RAM memory with the usual <code>read</code>/<code>write</code> API.</p>
+<h2>Event loops</h2>
+<p>This might seem like a deviation in the topic of the article, but hear me out. What if we create a event loop by using the aforementioned primitives? We could treat all the reads from file descriptors (file modifications, accepting connections, etc) as events and treat kernel level facilities in a well known paradigm.</p>
+<p>For example, if we want to create a webserver that caches all the documents but at the same time supports hot reloading (something like what hugo does with the <code>hugo serve</code> command), we can do that by simply listening to a socket and waiting for inotify events at the same time.</p>
+<h2>Even't</h2>
+<p>This seems fun, why don't we write a debugger now! We could wait for user input and traced process events by using select... you have been baited. Ptrace (the linux debugging API) and in fact the whole process management API ditches this file descriptor stuff in favour of using a new synchronization mechanism, the <code>wait</code> function.</p>
+<p>With this inconcistencies you just make it harder for system developers. You can't just wait for events from the kernel on a single point, you are forced to have multiple threads. Maybe threading is not a must, an there is some kind of trickery, but I dont even care about tricks, I just care about consistency and how straight forward the developer experience is.</p>
+<p>As mentioned before, the whole process management API is inconsistent. So if, for example, you want to create a service management program that has a socket to listen for commands, and manages services by restarting them when they crash; you need to have two event loops (one for receiving data from the socket, and another for child process' events).</p>
+<h2>How do we improve this?</h2>
+<p>This is probably not going to change on the posix/unixy world. Posix2 might be able to solve this issue, but in the mean time, what can we do with our current APIs? Let's propose a solution!</p>
+<p>In similar ways to the memfd and timerfd APIs, why don't we create a procfd familly of functions that fixes the synchronization inconsistencies?</p>
+<p>First, we need to define a way to retrieve one of these proc file descriptors. Following the timerfd way, the easiest solution would be to create a <code>procfd_create</code> function that takes the process id as an argument. I would argue that this is the most straight forward way to design an API, but I would go one step further and create the file descriptor by opening the <code>/proc/&lt;pid&gt;</code> directory.</p>
+<blockquote>
+<p>NOTE: Aparently there is a similar interface called <code>pidfd</code> with witch you can <code>pidfd_open</code> a process id to get a file descriptor related to the process. Includes functions like <code>pidfd_send_signal</code> to replace the traditional API.</p>
+</blockquote>
+<p>Now with this file descriptor, socket like semantics can apply to the <code>(e)poll</code>/<code>select</code> functions and the event loop would function as expected! Ptrace (and process related functions) can be turned into <code>ioctls</code> in order to improve consistency. Of course, the &quot;old way&quot; of doing things doesn't need to be removed, as that would break compatibility for no reason. Maybe posix2 can remove those instead of just marking them as deprecated.</p>
+<h2>Conclusions and possible experiments</h2>
+<p>It would be nice to create some kind of experiment where a kernel could be modified in order to provide the mentioned alternative and test real benefits on the mentioned API improvements. The changes could be simple syscall additions that would redirect, for example, the ptrace related procfd ioctls to the real ptrace syscall functions. But that's a proyect for another time!</p>
+<p>I really think that having a more consistent event loop like structure to programs can help. Event loops are widely used on the GUI and gaming side of programming, and they expose a simple and easy way to react to events on the system. Who knows, even system programmers can benefit from this in the near future!</p>
+</article>
+
+
+        <footer>
+            <a href="https://x.com/ikergalardi">twitter</a> ·
+            <a href="https://www.linkedin.com/in/iker-galardi/">linkedin</a> ·
+            <a href="https://github.com/IkerGalardi">github</a>
+        </footer>
+    </body>
+</html>

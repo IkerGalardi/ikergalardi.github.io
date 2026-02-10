@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Iker Galardi - 2024-07-17-how-cat-works.html</title>
+        <link rel="stylesheet" href="/style.css" />
+    </head>
+    <body>
+        <nav>
+            <h1 class="title">Iker Galardi</h1>
+            <h3 class="title">
+                <a href="/">home</a> · <a href="/posts">posts</a>
+            </h3>
+        </nav>
+
+        <article class="square"><h1>Unix utilities, how cat works</h1>
+<h2>Introduction</h2>
+<p>At university we had an <em>introduction to operating systems</em> course where we basically learnt how basic unix utilities like <code>cat</code>, <code>ls</code>, etc, worked by programming them in C using the unix API.</p>
+<p>This course was kind of mind blowing as I never touched such low level APIs, and kind of broke the illusion that system's programming involves some kind of black magic and Einstein level brainpower. So with this article series I want to re-remember those lessons in the hopes that someone can also break that barrier to learning this kind of low level stuff.</p>
+<p>For this, as the first step in this journey, I have chosen <code>cat</code> as the utility to reproduce as it's the simplest one that will lead as an introduction to file descriptors and file system system calls.</p>
+<h2>What the hell does <code>cat</code> actually do</h2>
+<p>First and foremost, its important to know what we actually want to implement, so lets read what the <a href="https://pubs.opengroup.org/onlinepubs/9699919799.2018edition/">posix specification</a> has to tell us about <code>cat</code>:</p>
+<blockquote>
+<p>The <em>cat</em> utility shall read files in sequence and shall write their contents to the standard output in the same sequence.</p>
+</blockquote>
+<p>Hold on, what the heck is standard output? To understand this, we first need to understand what a <a href="https://ikergalardi.github.io/post/2023-12-13-everything-is-a-file/">file descriptor</a>.</p>
+<h2>File descriptors and standard output</h2>
+<p>File descriptors are a way to access low level system services like the file system provided by the kernel. Normal user processes can't directly access the disk information as that would be a security nightmare, so there is a privileged piece of software commonly called the kernel that basically handles disk reads and write.</p>
+<blockquote>
+<p>NOTE: I'm completely ignoring microkernels for the sake of simplicity.</p>
+</blockquote>
+<p>So if the kernel is the only one to read and write information to the disk, how can my web browser even download files and place them in the <code>Downloads/</code> folder? To solve this problem, some smart people decided to invent system calls, which are basically function calls but hand the control to the kernel so that it can do those privileged operations.</p>
+<p>So, to keep it short, file descriptors are handles to files (or any kernel resource) that applications use to talk with the kernel and gather the information needed.</p>
+<p>And what about standard output? Well, the thing is that unix systems have a little convention that states that when your process or application is launched, at minimum it will have 3 file descriptors opened: <em>standard input</em>, <em>standard output</em> and <em>standard error</em>. When an application is launched from the terminal, key presses in the terminal will be sent through the <em>standard input</em>, data sent through the <em>standard output</em> and <em>standard error</em> file descriptors will be shown in the terminal window.</p>
+<blockquote>
+<p>NOTE: The aforementioned file descriptors are not really enforced by the system, so an application can be launched without any file descriptors attached, or those file descriptors can be redirected to files or other programs. This is a more advanced topic that will be discussed on another article.</p>
+</blockquote>
+<h2>Great! How do we work with those file descriptors?</h2>
+<p>Let's try to find out by first implementing the typical use case for the <code>cat</code> command and then move on and add more options. The standard tells us that the command should take an arbitrary number of paths from the command line and print them to standard output in order.</p>
+<p>Very few steps are required in the traditional unix file system API in order to read or write into a file:</p>
+<ol>
+<li>Open the file by using a path and the use case (read, write, both). This will return us a file descriptor.</li>
+<li>Read or write to the file by using the file descriptor.</li>
+<li>Close the file in order to hint the operating system we are not going to use it anymore.</li>
+</ol>
+<p>Apart from that, one can also gather information about the file in question by using the <code>stat</code> family of functions.</p>
+<h3>1. Opening the file</h3>
+<p>To open a file we conveniently use the <code>open</code>function call:</p>
+<pre><code class="language-C">int fd = open(filepath, 0, O_RDONLY);
+if (fd &lt; 0) {
+    perror(&quot;open&quot;);
+    exit(1);
+}
+</code></pre>
+<p>Let's break down what the above code snippet does. First we have a call to the <code>open</code> function that takes the next parameters:</p>
+<ul>
+<li><em>path</em>: A path to the file to be opened. This will be taken from the command line in our case.</li>
+<li><em>flags</em>: Additional flags that you can pass to the function in order to treat the file differently. Some examples are <code>O_ASYNC</code> in order to read and write information to the files asynchronously; <code>O_CREAT</code> in order to create the file when it does not exist... In our case, none of them are interesting to us.</li>
+<li><em>mode</em>: The mode to open the file, this can be either <code>O_RDONLY</code>, <code>O_WRONLY</code> or <code>O_RDWR</code>. Pretty self explanatory what each of them mean.
+After that, there is an if statement that checks whether the returned file descriptor is a valid one. If there is any error we simply print the error using <code>perror</code> (look it up in the man pages, don't be shy) and exit the program.</li>
+</ul>
+<h3>2. Reading/Writing information to the file</h3>
+<p>To read or write to or from a file we simply use the appropriate <code>read</code> or <code>write</code> function:</p>
+<pre><code class="language-C">char buffer[100] = {0}
+ssize_t rc = read(fd, buffer, 100);
+if (rc &lt; 0) {
+    perror(&quot;read&quot;);
+    exit(1);
+}
+</code></pre>
+<p>Let's break down what the above code snippet does. First we have a call to the <code>open</code> function that takes the next parameters:</p>
+<ul>
+<li><em>fd</em>: file descriptor to read from. This file descriptor needs to either be <code>open</code>-ed or inherited from the parent process like with <em>standard output</em>.</li>
+<li><em>buffer</em>: a buffer to where the read data will be written to.</li>
+<li><em>count</em>: the number of bytes to read</li>
+</ul>
+<p>The <code>read</code> function returns the number of read bytes, so we can use that return value to either detect if there were any errors when reading or to see how much data has been actually written.</p>
+<p>Likewise, the write function mimics the taken parameters, but instead of reading data from disk and placing it in the given buffer, takes data from the buffer and writes the given data to the file.</p>
+<h3>3. Closing the file descriptor</h3>
+<p>How convenient, there is a function called <code>close</code>!</p>
+<pre><code class="language-C">close(fd);
+</code></pre>
+<p>Simplest one by far! With this function call we simply tell the operating system that we will no longer use the file descriptor. This step is optional, but just keep in mind that certain unix systems have a maximum of open file descriptors or can artificially limit the amount of opened file descriptors a process can have, so its always a good practice to close them when you're no longer using them.</p>
+<h3>4. File information</h3>
+<p>In contrast to the before mentioned functions, <em>stat</em> is actually a family of functions that basically implement the same things but using different parameters. For example:</p>
+<ul>
+<li><code>stat</code> takes a path name and a pointer to the <code>stat</code> structure where information about the desired file is going to be stored.</li>
+<li><code>fstat</code> takes a file descriptor and a pointer to the <code>stat</code> structure.</li>
+</ul>
+<p>There is also <code>lstat</code>, that checks if the given pathname is a symbolic link, and if it is it simply returns information about the link instead of the file the link refers to.</p>
+<p>In our case we'll use the <code>fstat</code> function as we already will have an open file descriptor that we can use.</p>
+<h2>We have the tools, lets implement the command now</h2>
+<p>The typical use case for <code>cat</code> is simply reading the files passed from the command line and simply printing them to standard output. For this, the utility needs to go through the command line arguments and apply the before mentioned process of opening, reading/writing and closing the file.</p>
+<p>Where do we take the command line arguments? Have you ever wondered what those <code>argc</code> and <code>argv</code> parameters are in the main function? They are actually the argument count (<code>argc</code>) and the actual arguments(<code>argv</code>)! Knowing this, we can simply loop on the command line arguments and apply the before mentioned process:</p>
+<pre><code class="language-C">for (int i = 0; i &lt; argc; i++) {
+	int fd = open(filepath, 0, O_RDONLY);
+	
+	struct stat statbuf;
+	fstat(fd, &amp;statbuf);
+	
+	char *buf = malloc(statbuf.st_size);
+	read(fd, buf, statbuf.st_size);
+	write(STDOUT_FILENO, buf, rc);
+	free(buf);
+}
+</code></pre>
+<p>For the sake of simplicity I've removed all error checking so that its simpler to read and understand, but the full error checked version can be found on the <a href="https://github.com/IkerGalardi/learn-posix/blob/main/cat.c">github repository</a>.</p>
+<p>The shown code simply follows the above scheme of <code>open</code> -&gt; <code>read</code> -&gt; <code>close</code> on the argument files and simply writes to standard output. Also uses <code>fstat</code> in order to allocate a buffer large enough to hold the file data.</p>
+<h2>Finishing words</h2>
+<p>This article is just simply an introduction to concepts and basic functions for reading and writing to file descriptors. If more information is needed like more ways to open files or write to them simply check the manual pages provided by your Linux/BSD. For example, there are several ways to open files but we simply used the simplest one, for checking more ways simply <code>man 2 open</code>.</p>
+<p>Manual pages are a really good resource to learn about all the details that many tutorials and classes skip over for the sake of simplicity. These manuals normally include a group of functions (in the case of the <code>open</code> manual we can find the definition of <code>open</code>, <code>creat</code> and <code>openat</code>), explanation for all the parameters and struct fields, return values and error handling, and the most interesting one for learning purposes, a <em>see also</em> section with related functions.</p>
+<p>You can find my implementation on my <a href="https://github.com/IkerGalardi/learn-posix">learn-posix</a> where I also will add implementation for other posix utilities discussed on future articles.</p>
+</article>
+
+
+        <footer>
+            <a href="https://x.com/ikergalardi">twitter</a> ·
+            <a href="https://www.linkedin.com/in/iker-galardi/">linkedin</a> ·
+            <a href="https://github.com/IkerGalardi">github</a>
+        </footer>
+    </body>
+</html>
